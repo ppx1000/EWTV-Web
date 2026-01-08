@@ -1,0 +1,448 @@
+/* ===========================================================
+   GLOBAL / FÜR ALLE SEITEN (Slideshow, Header, Footer etc.)
+=========================================================== */
+
+/* === Grundlegendes Styling === */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: white;
+  color: #000;
+}
+
+/* === Slideshow (Startseite, evtl. Galerie) === */
+.slideshow-wrapper {
+  width: 100%;
+  height: 3cm;
+  overflow: hidden;
+  position: relative;
+}
+
+.slideshow-track {
+  display: flex;
+  width: 600vw;
+  transition: transform 2s ease-in-out;
+}
+
+.slideshow-track img {
+  width: 100vw;
+  height: 3cm;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* === Header mit Logo und Titel (alle Seiten) === */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  color: black;
+  padding: 20px 0;
+  font-weight: bold;
+  position: relative;
+}
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.logo {
+  height: 60px;
+  width: auto;
+}
+.header-text {
+  text-align: center;
+}
+.header-text .title {
+  font-size: 35px;
+}
+.header-text .subtitle {
+  font-size: 14px;
+  color: #9c9b9b;
+}
+
+/* === Navigation (Navbar für alle Seiten) === */
+.navbar {
+  background-color: #f2f2f2;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.navbar li {
+  margin: 0 15px;
+}
+.navbar a {
+  display: block;
+  padding: 15px 10px;
+  color: #333;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s, border-bottom 0.3s;
+  border-bottom: 2px solid transparent;
+}
+.navbar a:hover {
+  color: #000;
+  border-bottom: 2px solid #000;
+}
+
+/* === Footer (alle Seiten) === */
+.footer {
+  background-color: #111;
+  color: white;
+  padding: 40px 20px 20px;
+  font-size: 15px;
+}
+.footer-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.footer-content {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  flex-wrap: wrap;
+  text-align: left;
+  margin-bottom: 20px;
+}
+.footer-box {
+  max-width: 300px;
+}
+.footer-box h4 {
+  color: #ff2d2d;
+  margin-bottom: 8px;
+}
+.footer-box a {
+  color: #ddd;
+  text-decoration: none;
+}
+.footer-box a:hover {
+  text-decoration: underline;
+}
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #333;
+  padding-top: 10px;
+  font-size: 13px;
+  color: #bbb;
+}
+
+/* ===========================================================
+   INDEX / STARTSEITE (index.html)
+=========================================================== */
+
+/* === Home-Button (nur Startseite oder global?) === */
+.home-button {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #333;
+  background-color: #eaeaea;
+  padding: 6px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+.home-button:hover {
+  background-color: #e8e6e6;
+}
+.home-button a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+.home-button a:visited {
+  color: black;
+  text-decoration: none;
+}
+.home-button a:hover {
+  color: #333;
+}
+
+/* === Willkommen-Box (Startseite) === */
+.welcome-box {
+  background-color: #f8f8f8;
+  border: 2px solid #e0e0e0;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+.welcome-box h1 {
+  font-size: 32px;
+  color: #07bf10;
+  margin-bottom: 15px;
+}
+.welcome-box p {
+  font-size: 18px;
+  color: #333;
+}
+
+/* === Inhaltsbereich (Startseite und evtl. andere) === */
+.content {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* ===========================================================
+   NEWS (news.html)
+=========================================================== */
+.news-text {
+  padding-left: -20px;
+  text-align: left;
+}
+.news-text h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+.news-text h2 {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+.news-text p {
+  font-size: 15px;
+  line-height: 1.0;
+  margin-bottom: 10px;
+  color: rgb(25, 164, 25);
+}
+
+.news-text p.Achtung {
+  font-size: 15px;
+  line-height: 1.0;
+  margin-bottom: 10px;
+  color: rgb(242, 51, 51);
+}
+
+.news-text p.info {
+  font-size: 15px;
+  line-height: 1.0;
+  margin-bottom: 10px;
+  color: black;
+}
+
+/* === NEWS === */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 32px;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto 60px auto; /* Grid bleibt mittig */
+  padding: 40px 0 0 0;
+  justify-items: start;     /* Cards innerhalb des Grids linksbündig */
+}
+
+/* News Card */
+.news-card {
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+  min-height: 410px;
+  border-radius: 18px;
+  box-shadow: 0 4px 18px rgba(60, 60, 60, 0.07);
+  overflow: hidden;
+  background: #fff;
+  border: 1.5px solid #f2f2f2;
+  transition: box-shadow 0.18s, transform 0.18s;
+  margin: 0;
+  position: relative;
+}
+
+.news-card:hover {
+  box-shadow: 0 8px 32px rgba(70, 70, 70, 0.16);
+  transform: translateY(-5px) scale(1.01);
+}
+
+.news-image-container {
+  width: 100%;
+  height: 180px;
+  background: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid #ececec;
+}
+
+.news-card img,
+.news-image-container img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: #f4f4f4;
+  display: block;
+}
+
+.news-content {
+  flex: 1;
+  padding: 24px 24px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.news-content h3 {
+  font-size: 21px;
+  color: #c00000;
+  margin: 0 0 6px 0;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.news-content h3 a {
+  color: #c00000;
+  text-decoration: none;
+  font-weight: 700;
+}
+.news-content h3 a:hover {
+  text-decoration: underline;
+}
+
+.news-meta {
+  font-size: 13px;
+  color: #888;
+  margin: 0 0 13px 0;
+  font-style: italic;
+  letter-spacing: 0.2px;
+}
+
+.news-content p {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  color: #1a1a1a;
+  line-height: 1.45;
+}
+
+.news-link {
+  display: inline-block;
+  margin-top: 6px;
+  color: #d00000;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.14s;
+  align-self: flex-start;
+}
+
+.news-link:hover {
+  color: #c00000;
+  text-decoration: underline;
+}
+
+/* Responsive: 2-spaltig bei mittlerer, 1-spaltig bei kleiner Anzeige */
+@media (max-width: 1200px) {
+  .news-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 760px;
+  }
+}
+@media (max-width: 800px) {
+  .news-grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    gap: 28px 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+
+
+/* ===========================================================
+   TERMINE (termine.html)
+=========================================================== */
+/* → Hier ist kein expliziter CSS-Block in deinem Beispiel vorhanden. */
+
+/* ===========================================================
+   UNSERE TURNSTUNDEN (turnstunden.jpg / eigene Seite)
+=========================================================== */
+/* → Kein expliziter CSS-Block vorhanden. */
+
+/* ===========================================================
+   KONTAKT (kontakt.html)
+=========================================================== */
+.kontakt-box {
+  background-color: #f9f9f9;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 25px 30px;
+  border-left: 5px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  font-size: 18px;
+}
+.kontakt-box h2 {
+  margin-top: 0;
+  font-size: 24px;
+  color: #222;
+  margin-bottom: 20px;
+}
+.kontakt-eintrag {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+.kontakt-eintrag .label {
+  font-weight: bold;
+  display: inline-block;
+  width: 150px;
+}
+.kontakt-eintrag a {
+  color: #0077cc;
+  text-decoration: none;
+}
+.kontakt-eintrag a:hover {
+  text-decoration: underline;
+}
+.kontakt-eintrag .adresse {
+  margin-left: 0px;
+  line-height: 1.5;
+}
+.kontakt-hinweis {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 16px;
+}
+.kontakt-hinweis a {
+  color: #5a9a97;
+  font-weight: bold;
+  text-decoration: none;
+}
+.kontakt-hinweis a:hover {
+  text-decoration: underline;
+}
+
+/* ===========================================================
+   GESCHICHTE (geschichte.html)
+=========================================================== */
+/* → Kein expliziter CSS-Block vorhanden. */
+
+/* ===========================================================
+   GALERIE (galerie.html)
+=========================================================== */
+/* → Kein expliziter CSS-Block vorhanden, evtl. Slideshow mitverwenden. */
+
+/* ===========================================================
+   UNSERE VORTURNER (vorturner.html)
+=========================================================== */
+/* → Kein expliziter CSS-Block vorhanden. */
+
+/* ===========================================================
+   KURSE (kurse.html)
+=========================================================== */
+/* → Kein expliziter CSS-Block vorhanden. */
+
