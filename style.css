@@ -1,7 +1,48 @@
+/* Welcome Overlay */
+#welcome-overlay {
+  position: fixed;
+  inset: 0;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 2s ease;
+}
+
+/* Text */
+.welcome-text {
+  font-size: 30px;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: textFadeIn 1.2s ease forwards;
+  animation-delay: 0.4s;
+}
+
+/* Seiteninhalt */
+#page-content {
+  opacity: 1;
+  transition: opacity 2.5s ease;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+/* Text-Animation */
+@keyframes textFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
 /* ===========================================================
    GLOBAL / FÜR ALLE SEITEN (Slideshow, Header, Footer etc.)
 =========================================================== */
-
 /* === Grundlegendes Styling === */
 body {
   margin: 0;
