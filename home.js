@@ -24,3 +24,29 @@ track.style.transform = 'translateX(0)';
 
 // Alle 6 Sekunden Bild wechseln
 setInterval(slide, 6000);
+
+// Website start
+window.addEventListener("load", () => {
+  const overlay = document.getElementById("welcome-overlay");
+  const page = document.getElementById("page-content");
+
+  // Schon in diesem Tab gezeigt? Dann sofort weg damit.
+  if (sessionStorage.getItem("welcomeShown") === "1") {
+    overlay.style.display = "none";
+    page.classList.remove("hidden");
+    return;
+  }
+
+  // Markieren: in diesem Tab einmal gezeigt
+  sessionStorage.setItem("welcomeShown", "1");
+
+  // Normaler weicher Ablauf
+  setTimeout(() => {
+    overlay.style.opacity = "0";
+    page.classList.remove("hidden");
+  }, 2000);
+
+  setTimeout(() => {
+    overlay.style.display = "none";
+  }, 3500);
+});
