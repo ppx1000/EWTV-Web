@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Erster Wiener Turnverein: Turnstunden, Wartelisten, Trainerteam und Kontakt.">
+    <title>Erster Wiener Turnverein</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="#start" aria-label="Erster Wiener Turnverein Startseite">
+        <span class="brand-mark">
+          <img src="assets/ewtv-logo.png" alt="" aria-hidden="true">
+        </span>
+        <span>
+          <strong>EWTV</strong>
+          
+        </span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" data-menu-toggle>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="main-nav" data-nav>
+        <a href="#angebot">Angebot</a>
+        <a href="#wochenplan">Wochenplan</a>
+        <a href="#trainer">Trainer</a>
+        <a href="#beitraege">Beiträge</a>
+        <a href="#geschichte">Geschichte</a>
+        <a class="nav-contact" href="#kontakt">Kontakt</a>
+      </nav>
+    </header>
+
+    <main id="start">
+      <section class="hero">
+        <img src="assets/ewtv-hero.png" alt="Turnstunde in einer hellen Turnhalle mit Trainerin, Kindern und grünen Matten">
+        <div class="hero-shade"></div>
+        <div class="hero-content">
+          <p class="eyebrow reveal">Turnen in Wien seit Generationen</p>
+          <h1 class="reveal">Erster Wiener Turnverein</h1>
+          <p class="hero-copy reveal">
+            Bewegung, Technik und Gemeinschaft in einem modernen Trainingsumfeld. Kinder- und Jugendgruppen sind derzeit voll, Anfragen bleiben möglich.
+          </p>
+          <div class="hero-actions reveal">
+            <a class="button primary" href="#kontakt">Anfrage senden</a>
+            <a class="button secondary" href="#wochenplan">Wochenplan ansehen</a>
+          </div>
+        </div>
+        <aside class="capacity-card reveal">
+          <span class="status-dot"></span>
+          <strong>Kinder- und Jugendgruppen derzeit ausgebucht</strong>
+          <p>In unseren Kinder- und Jugendgruppen sind aktuell alle Plätze vergeben. Dafür führen wir Wartelisten.</p>
+          <p>In den Erwachsenengruppen sind weiterhin Plätze frei.</p>
+        </aside>
+      </section>
+
+      <section class="intro-band">
+        <div class="intro-grid">
+          <article class="intro-panel reveal">
+            <span>01</span>
+            <h2>Moderner Turnbetrieb</h2>
+            <p>Klare Gruppen, verlässliche Betreuung und Training mit Blick auf Technik, Freude und Entwicklung.</p>
+          </article>
+          <article class="intro-panel reveal">
+            <span>02</span>
+            <h2>Grün als Vereinsfarbe</h2>
+            <p>Ein ruhiger, kraftvoller Grünton prägt den neuen Auftritt: sportlich, frisch und wiedererkennbar.</p>
+          </article>
+          <article class="intro-panel reveal">
+            <span>03</span>
+            <h2>Transparente Platzvergabe</h2>
+            <p>Einfache Anmeldung per Mail, faire Vormerkung nach Alter und Gruppe – und rasche Rückmeldung, sobald ein Platz frei wird.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section overlap" id="angebot">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Turnstunden Angebot</p>
+          <h2>Für Kleinkinder, Kinder, Jugendliche und Erwachsene</h2>
+          <p>Kinder- und Jugendgruppen sind aktuell ausgebucht. Wettkampfturnen erfolgt über Empfehlung des Trainerteams. Erwachsene können direkt anfragen.</p>
+        </div>
+        <div class="program-explorer reveal" data-tabs>
+          <div class="program-tabs" role="tablist" aria-label="Turnstunden auswählen">
+            <button class="is-active" type="button" role="tab" aria-selected="true" data-tab="kleinkinder">Kleinkinder</button>
+            <button type="button" role="tab" aria-selected="false" data-tab="kinder">Kinder</button>
+            <button type="button" role="tab" aria-selected="false" data-tab="jugend">Jugend</button>
+            <button type="button" role="tab" aria-selected="false" data-tab="wettkampf">Wettkampf</button>
+            <button type="button" role="tab" aria-selected="false" data-tab="erwachsene">Erwachsene</button>
+            <button type="button" role="tab" aria-selected="false" data-tab="beitraege">Beiträge</button>
+          </div>
+          <div class="program-stage">
+            <article class="program-panel is-active" data-panel="kleinkinder">
+              <span class="icon">K</span>
+              <div>
+                <p class="pill">4-6 Jahre</p>
+                <h3>Kleinkinderturnstunde</h3>
+                <p>Für Kinder von 4 bis 6 Jahren. Spielerischer Einstieg mit einfachen Bewegungsaufgaben, Koordination, Gleichgewicht und sicherem Ankommen in der Turnhalle.</p>
+                <ul>
+                  <li>Alter: 4-6 Jahre</li>
+                  <li>Bewegung, Rhythmus und erste Turngrundlagen</li>
+                  <li>Warteliste wegen voller Gruppen</li>
+                </ul>
+              </div>
+            </article>
+            <article class="program-panel" data-panel="kinder">
+              <span class="icon">K</span>
+              <div>
+                <p class="pill">6-9 Jahre</p>
+                <h3>Kinderturnen</h3>
+                <p>Für Kinder von 6 bis 9 Jahren. Grundlagen werden klarer, Übungen werden strukturierter und der Spaß an Bewegung bleibt im Zentrum.</p>
+                <ul>
+                  <li>Alter: 6-9 Jahre</li>
+                  <li>Ruhige Gruppenführung mit klaren Abläufen</li>
+                  <li>Vormerkung nach Alter und freien Kapazitäten</li>
+                </ul>
+              </div>
+            </article>
+            <article class="program-panel" data-panel="jugend">
+              <span class="icon">J</span>
+              <div>
+                <p class="pill">10-14 Jahre</p>
+                <h3>Jugendturnen</h3>
+                <p>Für Jugendliche von 10 bis 14 Jahren. Mehr Technik, mehr Kraft und mehr Selbstständigkeit in einer Gruppe mit klaren Trainingszielen.</p>
+                <ul>
+                  <li>Alter: 10-14 Jahre</li>
+                  <li>Technikaufbau und Beweglichkeit</li>
+                  <li>Übungen mit sichtbarer Progression</li>
+                </ul>
+              </div>
+            </article>
+            <article class="program-panel" data-panel="wettkampf">
+              <span class="icon">W</span>
+              <div>
+                <p class="pill">8-14 Jahre, nach Absprache</p>
+                <h3>Wettkampfturnen</h3>
+                <p>Für Kinder und Jugendliche von 8 bis 14 Jahren, je nach Absprache mit den Trainerinnen und Trainern. Das Training findet freitags statt.</p>
+                <ul>
+                  <li>Alter: 8-14 Jahre</li>
+                  <li>Freitag, nach Absprache mit dem Trainerteam</li>
+                  <li>Geeignet nach Einschätzung von Trainingsstand und Gruppe</li>
+                </ul>
+              </div>
+            </article>
+            <article class="program-panel" data-panel="erwachsene">
+              <span class="icon">E</span>
+              <div>
+                <p class="pill">ab 15 Jahren</p>
+                <h3>Erwachsene</h3>
+                <p>Für alle ab 15 Jahren. Aktives Training für Kraft, Mobilität und turnerische Grundlagen in einem strukturierten Vereinsumfeld.</p>
+                <ul>
+                  <li>Alter: ab 15 Jahren</li>
+                  <li>Körperstabilität und Beweglichkeit</li>
+                  <li>Turnerische Grundlagen ohne Leistungsdruck</li>
+                </ul>
+              </div>
+            </article>
+            <article class="program-panel" data-panel="beitraege">
+              <span class="icon">€</span>
+              <div>
+                <p class="pill">Jahresbeitrag</p>
+                <h3>Mitgliedsbeiträge</h3>
+                <p>Der Beitrag gilt jeweils für ein Vereinsjahr.</p>
+                <ul>
+                  <li>Kinder, Schüler, Lehrlinge und Studenten: 170 €</li>
+                  <li>Erwachsene: 250 €</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section finder-section">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Interaktiver Finder</p>
+          <h2>Welche Gruppe passt?</h2>
+          <p>Ein paar kurze Fragen beantworten, dann schlägt die Website die passende Gruppe und den nächsten Schritt vor.</p>
+        </div>
+        <div class="finder reveal" data-finder>
+          <div class="finder-controls" data-quiz-track>
+            <div class="quiz-progress" aria-label="Quiz Fortschritt">
+              <span class="is-active" data-quiz-progress="0"><b>1</b><small>Alter</small></span>
+              <span data-quiz-progress="1"><b>2</b><small>Ziel</small></span>
+              <span data-quiz-progress="2"><b>3</b><small>Erfahrung</small></span>
+              <span data-quiz-progress="3"><b>4</b><small>Ergebnis</small></span>
+            </div>
+            <div class="quiz-block is-active" data-quiz-step="0">
+              <h3>Alter</h3>
+              <div class="quiz-options" aria-label="Alter auswählen">
+                <button type="button" data-age-group="4-6">4-6 Jahre</button>
+                <button type="button" data-age-group="6-9">6-9 Jahre</button>
+                <button type="button" data-age-group="10-14">10-14 Jahre</button>
+                <button type="button" data-age-group="15+">15+</button>
+              </div>
+              <button class="quiz-next" type="button" data-quiz-next disabled>Weiter</button>
+            </div>
+            <div class="quiz-block" data-quiz-step="1">
+              <h3>Was soll beim Training im Vordergrund stehen?</h3>
+              <div class="quiz-options" aria-label="Trainingsschwerpunkt auswählen">
+                <button type="button" data-goal="grundlagen">Spielerisch bewegen und Turngrundlagen lernen</button>
+                <button type="button" data-goal="elemente">Neue Turnelemente lernen und sicherer werden</button>
+                <button type="button" data-goal="kontrolle">Kraft, Beweglichkeit und Körperkontrolle verbessern</button>
+              </div>
+              <button class="quiz-next" type="button" data-quiz-next disabled>Weiter</button>
+            </div>
+            <div class="quiz-block" data-quiz-step="2">
+              <h3>Wie viel Turnerfahrung ist schon vorhanden?</h3>
+              <div class="quiz-options" aria-label="Turnerfahrung auswählen">
+                <button type="button" data-experience="keine">Noch keine</button>
+                <button type="button" data-experience="erste">Erste turnerische Erfahrungen gesammelt</button>
+                <button type="button" data-experience="regelmaessig">Regelmäßiges Training und sichere Grundlagen</button>
+              </div>
+              <button class="quiz-next" type="button" data-quiz-next disabled>Ergebnis anzeigen</button>
+            </div>
+            <button class="button secondary quiz-restart" type="button" data-quiz-restart>Neustart</button>
+          </div>
+          <div class="finder-result" data-finder-result>
+            <div class="finder-placeholder" data-finder-placeholder>
+              <strong>Frage 1 von 3</strong>
+              <span>Wähle zuerst das Alter aus.</span>
+            </div>
+            <p class="eyebrow">Vorschlag</p>
+            <h3 data-finder-title>Kleinkinderturnstunde</h3>
+            <p data-finder-copy>Für Kinder von 4 bis 6 Jahren: spielerischer Einstieg, Koordination und erste Turngrundlagen.</p>
+            <p class="finder-extra" data-finder-extra hidden></p>
+            <a class="button primary" data-finder-mail href="mailto:office@ewtv.at?subject=Wartelisten-Anfrage%20Kleinkinderturnstunde">Diese Warteliste anfragen</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section schedule-section" id="wochenplan">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Wochenplan</p>
+          <h2>Wann was stattfindet</h2>
+          <p>Wähle einen Tag aus und sieh direkt, welche Turnstunden stattfinden. Wartelisten gelten für Kinder- und Jugendgruppen.</p>
+        </div>
+        <div class="schedule-tools reveal" aria-label="Wochentag auswählen">
+          <button class="is-active" type="button" data-filter="mo">Mo</button>
+          <button type="button" data-filter="di">Di</button>
+          <button type="button" data-filter="mi">Mi</button>
+          <button type="button" data-filter="do">Do</button>
+          <button type="button" data-filter="fr">Fr</button>
+        </div>
+        <div class="schedule reveal" data-schedule>
+          <button class="schedule-row" type="button" data-day="mo" data-note="Eltern-Kind-Turnen: aktuell voll.">
+            <span class="schedule-time">15:15-16:15</span>
+            <span class="schedule-name">Eltern-Kind-Turnen</span>
+            <span class="schedule-place">gr. Halle</span>
+          </button>
+          <button class="schedule-row" type="button" data-day="mo" data-note="Kleinkinderturnstunde: für 4-6 Jahre, aktuell voll.">
+            <span class="schedule-time">16:20-17:20</span>
+            <span class="schedule-name">Kleinkinderturnstunde</span>
+            <span class="schedule-place">gr. Halle</span>
+          </button>
+          <button class="schedule-row" type="button" data-day="mo" data-note="Kinderturnen: für 6-9 Jahre, aktuell voll.">
+            <span class="schedule-time">17:20-18:50</span>
+            <span class="schedule-name">Kinderturnen 6-9 Jahre</span>
+            <span class="schedule-place">gr. Halle</span>
+          </button>
+          <button class="schedule-row" type="button" data-day="mo" data-note="Kraft & Ausdauer: Bei Interesse bitte direkt anfragen.">
+            <span class="schedule-time">17:20-18:20</span>
+            <span class="schedule-name">Kraft & Ausdauer</span>
+            <span class="schedule-place">kl. Halle</span>
+          </button>
+          <button class="schedule-row" type="button" data-day="mo" data-note="Damengymnastik: Bei Interesse bitte direkt anfragen.">
+            <span class="schedule-time">19:00-20:00</span>
+            <span class="schedule-name">Damengymnastik</span>
+            <span class="schedule-place">gr. Halle</span>
+          </button>
+          <button class="schedule-row" type="button" data-day="di" data-note="Bodywork: Bei Interesse bitte direkt anfragen.">
+            <span class="schedule-time">19:00-20:00</span>
+            <span class="schedule-name">Bodywork</span>
+            <span class="schedule-place">gr. Halle</span>
+          </button>
+          <button class="schedule-row" type="button" data-day="mi" data-note="Damengymnastik: Bei Interesse bitte direkt anfragen.">
+            <span class="schedule-time">09:00-10:00</span>
+            <span class="schedule-name">Damengymnastik</span>
+            <span class="schedule-place">gr. Halle</span>
+          </button>
+          <button class="schedule-row" type="button" data-day="mi" data-note="Jugendturnen: für 10-14 Jahre, aktuell voll.">
+            <span class="schedule-time">17:00-18:30</span>
+            <span class="schedule-name">Jugendturnen 10-14 Jahre</span>
+            <span class="schedule-place">gr. Halle</span>
+          </button>
+          <button class="schedule-row" type="button" data-day="mi" data-note="Erwachsenenturnen: aktuell nicht voll. Bei Interesse bitte direkt anfragen.">
+            <span class="schedule-time">18:30-20:00</span>
+            <span class="schedule-name">Erwachsenenturnen</span>
+            <span class="schedule-place">gr. Halle</span>
+          </button>
+          <button class="schedule-row" type="button" data-day="do" data-note="Damengymnastik: Bei Interesse bitte direkt anfragen.">
+            <span class="schedule-time">09:00-10:00</span>
+            <span class="schedule-name">Damengymnastik</span>
+            <span class="schedule-place">gr. Halle</span>
+          </button>
+          <button class="schedule-row" type="button" data-day="fr" data-note="Wettkampfturnen: Freitag, für 8-14 Jahre, nur nach Absprache mit den Trainerinnen und Trainern.">
+            <span class="schedule-time">16:30-18:30</span>
+            <span class="schedule-name">Wettkampfturnen 8-14 Jahre</span>
+            <span class="schedule-place">gr. Halle</span>
+          </button>
+          <button class="schedule-row" type="button" data-day="fr" data-note="Erwachsenenturnen: aktuell nicht voll. Bei Interesse bitte direkt anfragen.">
+            <span class="schedule-time">18:30-20:00</span>
+            <span class="schedule-name">Erwachsenenturnen</span>
+            <span class="schedule-place">gr. Halle</span>
+          </button>
+          <div class="schedule-empty is-hidden" data-day-empty>Keine Turnstunde an diesem Tag eingetragen.</div>
+        </div>
+        <p class="schedule-note reveal" data-schedule-note>Montag ausgewählt: Wähle eine Stunde, um Details zu sehen.</p>
+      </section>
+
+      <section class="section apparatus-section">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Trainingsszenen</p>
+          <h2>Geräte anklicken und entdecken</h2>
+          <p>Eine kleine interaktive Gerätewand: Jede Auswahl verändert Fokus, Text und Bewegungsimpuls.</p>
+        </div>
+        <div class="apparatus-lab reveal" data-apparatus>
+          <div class="apparatus-board" aria-label="Geräte auswählen">
+            <button class="apparatus-item is-active" type="button" data-apparatus-key="boden">
+              <span>Boden</span>
+            </button>
+            <button class="apparatus-item" type="button" data-apparatus-key="reck">
+              <span>Reck</span>
+            </button>
+            <button class="apparatus-item" type="button" data-apparatus-key="barren">
+              <span>Barren</span>
+            </button>
+            <button class="apparatus-item" type="button" data-apparatus-key="balken">
+              <span>Balken</span>
+            </button>
+            <button class="apparatus-item" type="button" data-apparatus-key="sprung">
+              <span>Sprung</span>
+            </button>
+            <button class="apparatus-item" type="button" data-apparatus-key="minitramp">
+              <span>Minitramp</span>
+            </button>
+          </div>
+          <div class="apparatus-detail" data-apparatus-detail>
+            <img class="apparatus-image" data-apparatus-image src="assets/apparatus-boden.jpg?v=3" alt="Stilisierte Turnszene am Gerät Boden">
+            <div class="motion-symbol" data-motion-symbol>B</div>
+            <p class="eyebrow">Fokus</p>
+            <h3 data-apparatus-title>Boden</h3>
+            <p data-apparatus-copy>Rollen, Stützen, Körperspannung und sichere Landungen bilden die Basis für vieles, was später an Geräten gebraucht wird.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section trainers" id="trainer">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Trainerteam</p>
+          <h2>Unsere Vorturnerinnen und Vorturner</h2>
+        </div>
+        <div class="trainer-grid" data-trainer-grid>
+          <a class="trainer-card reveal" href="trainer.html?person=christopher" data-trainer-card="christopher">
+            <div class="trainer-photo trainer-a"></div>
+            <div>
+              <h3>Christopher</h3>
+              <span class="trainer-badge">Kleinkinder, Kinder & Wettkampfturnen</span>
+              <p class="trainer-card-summary">Spaß an Bewegung von den ersten Schritten bis zum Wettkampf.</p>
+              <span class="trainer-card-link">Profil ansehen</span>
+            </div>
+          </a>
+          <a class="trainer-card reveal" href="trainer.html?person=julia" data-trainer-card="julia">
+            <div class="trainer-photo trainer-b"></div>
+            <div>
+              <h3>Julia</h3>
+              <span class="trainer-badge">Kleinkinder & Kinder</span>
+              <p class="trainer-card-summary">Ruhige Begleitung und klare Übungen.</p>
+              <span class="trainer-card-link">Profil ansehen</span>
+            </div>
+          </a>
+          <a class="trainer-card reveal" href="trainer.html?person=friedericke" data-trainer-card="friedericke">
+            <div class="trainer-photo trainer-c"></div>
+            <div>
+              <h3>Friedericke</h3>
+              <span class="trainer-badge">Jugend & Wettkampf</span>
+              <p class="trainer-card-summary">Technik, Körperspannung und Grundlagen.</p>
+              <span class="trainer-card-link">Profil ansehen</span>
+            </div>
+          </a>
+          <a class="trainer-card reveal" href="trainer.html?person=tobias" data-trainer-card="tobias">
+            <div class="trainer-photo trainer-d"></div>
+            <div>
+              <h3>Tobias</h3>
+              <span class="trainer-badge">Kleinkinder & Kinder</span>
+              <p class="trainer-card-summary">Energie, Übersicht und Freude an Bewegung.</p>
+              <span class="trainer-card-link">Profil ansehen</span>
+            </div>
+          </a>
+          <a class="trainer-card reveal" href="trainer.html?person=felix" data-trainer-card="felix">
+            <div class="trainer-photo trainer-e"></div>
+            <div>
+              <h3>Felix</h3>
+              <span class="trainer-badge">Jugend & Wettkampf</span>
+              <p class="trainer-card-summary">Kraftaufbau und sichere Progressionen.</p>
+              <span class="trainer-card-link">Profil ansehen</span>
+            </div>
+          </a>
+          <a class="trainer-card reveal" href="trainer.html?person=lisa" data-trainer-card="lisa">
+            <div class="trainer-photo trainer-f"></div>
+            <div>
+              <h3>Lisa</h3>
+              <span class="trainer-badge">Kleinkinder & Kinder</span>
+              <p class="trainer-card-summary">Spielerischer Zugang und viel Geduld.</p>
+              <span class="trainer-card-link">Profil ansehen</span>
+            </div>
+          </a>
+          <a class="trainer-card reveal" href="trainer.html?person=christina" data-trainer-card="christina">
+            <div class="trainer-photo trainer-g"></div>
+            <div>
+              <h3>Christina</h3>
+              <span class="trainer-badge">Damengymnastik</span>
+              <p class="trainer-card-summary">Training für Damengymnastik.</p>
+              <span class="trainer-card-link">Profil ansehen</span>
+            </div>
+          </a>
+          <a class="trainer-card reveal" href="trainer.html?person=patrick" data-trainer-card="patrick">
+            <div class="trainer-photo trainer-h"></div>
+            <div>
+              <h3>Patrick</h3>
+              <span class="trainer-badge">Kinder & Jugend</span>
+              <p class="trainer-card-summary">Ruhiger Aufbau und klare Hilfestellung.</p>
+              <span class="trainer-card-link">Profil ansehen</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section class="story" id="geschichte">
+        <div class="story-content reveal">
+          <p class="eyebrow">Geschichte</p>
+          <h2>Tradition, die sich weiterbewegt</h2>
+          <p>
+            Der Erste Wiener Turnverein steht für die Idee, dass Turnen mehr ist als Sport: Es verbindet Disziplin, Körpergefühl und Gemeinschaft. Aus dieser Tradition entsteht heute ein lebendiger Verein, der Kindern, Jugendlichen und Erwachsenen einen strukturierten Raum für Bewegung bietet.
+          </p>
+        </div>
+        <div class="story-stack reveal" aria-label="Vereinswerte">
+          <span>Gemeinschaft</span>
+          <span>Technik</span>
+          <span>Verlässlichkeit</span>
+          <span>Freude an Bewegung</span>
+        </div>
+      </section>
+
+      <section class="section timeline-section">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Vereinsgefühl</p>
+          <h2>Von Tradition zu heute</h2>
+        </div>
+        <div class="timeline reveal" data-timeline>
+          <div class="timeline-controls" role="tablist" aria-label="Vereinsphasen">
+            <button class="is-active" type="button" data-year="tradition">Tradition</button>
+            <button type="button" data-year="training">Training</button>
+            <button type="button" data-year="heute">Heute</button>
+          </div>
+          <article class="timeline-panel">
+            <span data-timeline-year>Tradition</span>
+            <h3 data-timeline-title>Ein Verein mit Haltung</h3>
+            <p data-timeline-copy>Turnen bedeutet Gemeinschaft, Verlässlichkeit und die Freude daran, sich Schritt für Schritt weiterzuentwickeln.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section fees-section" id="beitraege">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Jahresbeitrag</p>
+          <h2>Mitgliedsbeiträge</h2>
+          <p>Der Beitrag gilt jeweils für ein Vereinsjahr.</p>
+        </div>
+        <div class="fee-grid reveal">
+          <article class="fee-card">
+            <span>Kinder, Schüler, Lehrlinge & Studenten</span>
+            <strong>170 €</strong>
+            <p>Jahresbeitrag für Kinder, Schüler, Lehrlinge und Studenten.</p>
+          </article>
+          <article class="fee-card fee-card-featured">
+            <span>Erwachsene</span>
+            <strong>250 €</strong>
+            <p>Jahresbeitrag für Erwachsene ab 15 Jahren.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section faq-section">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Warteliste & Ablauf</p>
+          <h2>Häufige Fragen</h2>
+        </div>
+        <div class="faq-list reveal" data-faq>
+          <article class="faq-item is-open">
+            <button type="button" aria-expanded="true">
+              <span>1. Kann ich mein Kind anmelden, wenn die Kinder- und Jugendgruppen voll sind?</span>
+              <strong>+</strong>
+            </button>
+            <p>Ja. Auch wenn derzeit kein Platz in den Kinder- oder Jugendgruppen frei ist, kann Ihr Kind auf die Warteliste der passenden Turnstunde gesetzt werden. Sobald ein Platz frei wird, werden Sie per E-Mail kontaktiert.</p>
+          </article>
+          <article class="faq-item">
+            <button type="button" aria-expanded="false">
+              <span>2. Wie wird die Warteliste gereiht?</span>
+              <strong>+</strong>
+            </button>
+            <p>Die Kinder werden nach dem Zeitpunkt der eingegangenen Anfrage gereiht und in die entsprechende Warteliste aufgenommen.</p>
+          </article>
+          <article class="faq-item">
+            <button type="button" aria-expanded="false">
+              <span>3. Wie lange bleibt mein Kind auf der Warteliste?</span>
+              <strong>+</strong>
+            </button>
+            <p>Ihr Kind bleibt auf der Warteliste, bis ein passender Platz frei wird. Eine erneute Anmeldung ist nicht notwendig.</p>
+          </article>
+          <article class="faq-item">
+            <button type="button" aria-expanded="false">
+              <span>4. Was passiert, wenn ein Platz frei wird?</span>
+              <strong>+</strong>
+            </button>
+            <p>Sobald ein Platz frei ist, erhalten Sie eine E-Mail. Bitte antworten Sie innerhalb von zwei Wochen. Erfolgt innerhalb dieser Frist keine Rückmeldung, wird das Kind von der Warteliste genommen und der Platz dem nächsten Kind angeboten.</p>
+          </article>
+          <article class="faq-item">
+            <button type="button" aria-expanded="false">
+              <span>5. Ist ein Einstieg während des Turnjahres möglich?</span>
+              <strong>+</strong>
+            </button>
+            <p>Ja. Die Wartelisten werden während des gesamten Turnjahres regelmäßig aktualisiert. Sobald ein Platz frei wird, kann ein Kind auch unter dem Jahr einsteigen.</p>
+          </article>
+          <article class="faq-item">
+            <button type="button" aria-expanded="false">
+              <span>6. Hat mein Kind nach der Aufnahme einen fixen Platz?</span>
+              <strong>+</strong>
+            </button>
+            <p>Ja. Sobald Ihr Kind aufgenommen wurde, ist es Mitglied des Vereins und hat einen festen Platz im Verein. Je nach Alter und Entwicklung kann es später in eine passende andere Turnstunde aufsteigen.</p>
+          </article>
+          <article class="faq-item">
+            <button type="button" aria-expanded="false">
+              <span>7. Dürfen Eltern während der Turnstunde dabei sein?</span>
+              <strong>+</strong>
+            </button>
+            <p>Bei den Kleinkindergruppen dürfen Eltern während der ersten drei Turnstunden dabei sein. Danach sollen die Kinder ohne Begleitung teilnehmen. So können sie sich besser auf die Turnstunde konzentrieren und werden nicht dadurch abgelenkt, dass sie zwischendurch zu ihren Eltern laufen oder etwas zeigen möchten.</p>
+          </article>
+          <article class="faq-item">
+            <button type="button" aria-expanded="false">
+              <span>8. Welche Schuhe sind in der Turnhalle erlaubt?</span>
+              <strong>+</strong>
+            </button>
+            <p>Straßenschuhe sind in der Turnhalle nicht erlaubt. Die Kinder können barfuß, mit rutschfesten Socken oder mit Turnpatschen teilnehmen.</p>
+          </article>
+          <article class="faq-item">
+            <button type="button" aria-expanded="false">
+              <span>9. Darf mein Kind in der Halle essen oder trinken?</span>
+              <strong>+</strong>
+            </button>
+            <p>In der Turnhalle selbst darf nicht gegessen oder getrunken werden. Im Verein gibt es aber eine Trinkecke, in der die Kinder trinken dürfen. Bitte geben Sie Ihrem Kind daher immer eine Wasserflasche mit.</p>
+          </article>
+          <article class="faq-item">
+            <button type="button" aria-expanded="false">
+              <span>10. Was gilt bei Krankheit oder einer Abmeldung?</span>
+              <strong>+</strong>
+            </button>
+            <p>Bei Krankheit dürfen TurnerInnen aus Sicherheitsgründen nicht am Training teilnehmen. Möchte ein Kind dauerhaft nicht mehr teilnehmen, kann es per E-Mail oder persönlich bei den Trainerinnen und Trainern abgemeldet werden.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact-section" id="kontakt">
+        <div class="contact-card reveal">
+          <div>
+            <p class="eyebrow">Kontakt</p>
+            <h2>Warteliste oder Anfrage senden</h2>
+            <p>
+              Bitte Name, Alter, gewünschte Gruppe und mögliche Trainingstage angeben. Für Kinder- und Jugendgruppen läuft die Anfrage über die Warteliste. Der Jahresbeitrag beträgt 170 € für Kinder, Schüler, Lehrlinge und Studenten sowie 250 € für Erwachsene.
+            </p>
+            <div class="contact-picker" data-contact-picker>
+              <button class="is-active" type="button" data-subject="Kleinkinderturnstunde">Kleinkinder</button>
+              <button type="button" data-subject="Kinderturnen">Kinder</button>
+              <button type="button" data-subject="Jugendturnen">Jugend</button>
+              <button type="button" data-subject="Erwachsene">Erwachsene</button>
+            </div>
+          </div>
+          <a class="button primary mail-button" data-mail-link href="mailto:office@ewtv.at?subject=Wartelisten-Anfrage%20Kleinkinderturnstunde&body=Liebes%20EWTV-Team%2C%0D%0A%0D%0Aich%20m%C3%B6chte%20mich%20bzw.%20mein%20Kind%20gerne%20auf%20die%20Warteliste%20setzen%20lassen.%0D%0A%0D%0AName%3A%0D%0AAlter%3A%0D%0AGew%C3%BCnschte%20Gruppe%3A%20Kleinkinderturnstunde%0D%0AM%C3%B6gliche%20Trainingstage%3A%0D%0ATelefonnummer%3A%0D%0A%0D%0AVielen%20Dank!">
+            Mail an office@ewtv.at
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-column">
+          <h2>Kontakt</h2>
+          <p>
+            <strong>Erster Wiener Turnverein</strong><br>
+            Turnsaal: Schleifmühlgasse 23, 1040 Wien<br>
+            <a href="mailto:office@ewtv.at">office@ewtv.at</a><br>
+            <a href="tel:+43123456789">+43 1 234 56 789</a>
+          </p>
+        </div>
+        <div class="footer-column">
+          <h2>Vereinsdaten</h2>
+          <p>
+            Obfrau: Christina Oppitz<br>
+            Gegründet: 1861<br>
+            Mitglied bei: Turnsport Austria, ÖTB, ASVÖ
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Erster Wiener Turnverein</span>
+        <span>Webdesign & Umsetzung: intern</span>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
