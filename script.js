@@ -134,7 +134,6 @@ const updateMailLink = (group) => {
     "Name:",
     "Alter:",
     `Gewünschte Gruppe: ${group}`,
-    "Mögliche Trainingstage:",
     "Telefonnummer:",
     "",
     "Vielen Dank!"
