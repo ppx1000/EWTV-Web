@@ -1631,7 +1631,7 @@ button {
   font-weight: 800;
 }
 
-.fees-section {
+.section.fees-section {
   padding-top: 92px;
   padding-bottom: 92px;
 }
@@ -1693,7 +1693,7 @@ button {
   padding: 0 16px 96px;
 }
 
-.faq-section {
+.section.faq-section {
   padding-top: 0;
   padding-bottom: 92px;
 }
