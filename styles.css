@@ -2112,9 +2112,9 @@ body.js-enabled .reveal.is-visible {
   position: fixed;
   z-index: 100;
   top: 112px;
-  right: 7px;
+  left: 8px;
   bottom: 24px;
-  width: 5px;
+  width: 9px;
   overflow: hidden;
   border-radius: 999px;
   background: rgba(142, 214, 167, 0.24);
@@ -2132,5 +2132,5 @@ body.js-enabled .reveal.is-visible {
   box-shadow: 0 0 0 1px rgba(255, 253, 248, 0.45);
 }
 @media (max-width: 760px) {
-  .scroll-position { top: 96px; right: 3px; bottom: 16px; width: 3px; }
+  .scroll-position { top: 96px; left: 4px; bottom: 16px; width: 6px; }
 }
