@@ -2,8 +2,6 @@ const header = document.querySelector("[data-header]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const nav = document.querySelector("[data-nav]");
 const revealItems = document.querySelectorAll(".reveal");
-const tabButtons = document.querySelectorAll("[data-tab]");
-const tabPanels = document.querySelectorAll("[data-panel]");
 const filterButtons = document.querySelectorAll("[data-filter]");
 const scheduleRows = document.querySelectorAll("[data-schedule] .schedule-row");
 const scheduleNote = document.querySelector("[data-schedule-note]");
@@ -32,10 +30,6 @@ const motionSymbol = document.querySelector("[data-motion-symbol]");
 const apparatusImage = document.querySelector("[data-apparatus-image]");
 const apparatusDetail = document.querySelector("[data-apparatus-detail]");
 const apparatusLab = document.querySelector("[data-apparatus]");
-const timelineButtons = document.querySelectorAll("[data-year]");
-const timelineYear = document.querySelector("[data-timeline-year]");
-const timelineTitle = document.querySelector("[data-timeline-title]");
-const timelineCopy = document.querySelector("[data-timeline-copy]");
 const trainerCards = document.querySelectorAll("[data-trainer-card]");
 const trainerProfile = document.querySelector("[data-trainer-profile]");
 const profilePhoto = document.querySelector("[data-profile-photo]");
@@ -66,19 +60,27 @@ nav.addEventListener("click", (event) => {
   }
 });
 
-tabButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const next = button.dataset.tab;
-
-    tabButtons.forEach((tab) => {
-      const isActive = tab === button;
-      tab.classList.toggle("is-active", isActive);
-      tab.setAttribute("aria-selected", String(isActive));
-    });
-
-    tabPanels.forEach((panel) => {
-      panel.classList.toggle("is-active", panel.dataset.panel === next);
-    });
+const offerTabs = Array.from(document.querySelectorAll("#angebot .offer-choice"));
+const selectOffer = (selected, focus = false) => {
+  offerTabs.forEach((tab) => {
+    const active = tab === selected;
+    tab.setAttribute("aria-selected", String(active));
+    tab.tabIndex = active ? 0 : -1;
+    document.getElementById(tab.getAttribute("aria-controls")).hidden = !active;
+  });
+  if (focus) selected.focus();
+};
+offerTabs.forEach((tab, index) => {
+  tab.addEventListener("click", () => selectOffer(tab));
+  tab.addEventListener("keydown", (event) => {
+    let next;
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") next = (index + 1) % offerTabs.length;
+    if (event.key === "ArrowLeft" || event.key === "ArrowUp") next = (index - 1 + offerTabs.length) % offerTabs.length;
+    if (event.key === "Home") next = 0;
+    if (event.key === "End") next = offerTabs.length - 1;
+    if (next === undefined) return;
+    event.preventDefault();
+    selectOffer(offerTabs[next], true);
   });
 });
 
@@ -121,33 +123,42 @@ scheduleRows.forEach((row) => {
 
 const updateMailLink = (group) => {
   if (!mailLink) return;
-
-  const isWaitlistGroup = ["Kleinkinderturnstunde", "Kinderturnen", "Jugendturnen"].includes(group);
-  const subject = `${isWaitlistGroup ? "Wartelisten-Anfrage" : "Anfrage"} ${group}`;
+  const waitlist = ['Kleinkinderturnstunde', 'Kinderturnen', 'Jugendturnen'].includes(group);
+  const subject = (waitlist ? 'Wartelisten-Anfrage ' : 'Anfrage ') + group;
   const body = [
-    "Liebes EWTV-Team,",
-    "",
-    isWaitlistGroup
-      ? "ich möchte mich bzw. mein Kind gerne auf die Warteliste setzen lassen."
-      : "ich interessiere mich für das Erwachsenentraining und möchte gerne weitere Informationen erhalten.",
-    "",
-    "Name:",
-    "Alter:",
-    `Gewünschte Gruppe: ${group}`,
-    "Telefonnummer:",
-    "",
-    "Vielen Dank!"
-  ].join("\r\n");
-
-  mailLink.href = `mailto:office@ewtv.at?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    'Liebes EWTV-Team,', '',
+    waitlist ? 'ich möchte mich bzw. mein Kind gerne auf die Warteliste setzen lassen.'
+      : 'ich interessiere mich für das folgende Training und möchte gerne weitere Informationen erhalten.',
+    '', 'Name:', ...(waitlist ? ['Alter:'] : []), 'Gewünschte Gruppe: ' + group, 'Telefonnummer:', '', 'Vielen Dank!'
+  ].join('\r\n');
+  mailLink.href = 'mailto:office@ewtv.at?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  mailLink.textContent = waitlist ? 'Warteliste anfragen' : 'Training anfragen';
 };
-
-contactButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    contactButtons.forEach((item) => item.classList.toggle("is-active", item === button));
-    updateMailLink(button.dataset.subject ?? "Turnstunde");
+const selectContact = button => {
+  contactButtons.forEach(item => {
+    const active = item === button;
+    item.classList.toggle('is-active', active);
+    item.setAttribute('aria-pressed', String(active));
+  });
+  updateMailLink(button.dataset.subject);
+};
+contactButtons.forEach(button => button.addEventListener('click', () => selectContact(button)));
+const selectContactFromHash = () => {
+  const button = Array.from(contactButtons).find(item => '#' + item.id === window.location.hash);
+  if (button) selectContact(button);
+};
+document.querySelectorAll('#angebot .offer-contact, [data-finder-mail]').forEach(link => {
+  link.addEventListener('click', () => {
+    const button = Array.from(contactButtons).find(item => '#' + item.id === link.getAttribute('href'));
+    if (!button) return;
+    selectContact(button);
+    button.focus({preventScroll: true});
+    button.scrollIntoView({block: 'center', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
   });
 });
+window.addEventListener('hashchange', selectContactFromHash);
+if (contactButtons.length) selectContact(contactButtons[0]);
+selectContactFromHash();
 
 faqItems.forEach((item) => {
   const button = item.querySelector("button");
@@ -165,20 +176,24 @@ faqItems.forEach((item) => {
   });
 });
 
-const finderCopyByGroup = {
-  "Kleinkinderturnstunde": "Für 4-6 Jahre: spielerischer Einstieg, Koordination und erste Turngrundlagen.",
-  Kinderturnen: "Für 6-9 Jahre: klare Grundlagen, Bewegungssicherheit und Freude am Turnen.",
-  Jugendturnen: "Für 10-14 Jahre: mehr Technik, Kraft und selbstständiges Training in der Gruppe.",
-  Erwachsene: "Ab 15 Jahren: Kraft, Mobilität und turnerische Basics ohne Leistungsdruck. Diese Gruppe ist aktuell nicht voll."
-};
-
 const getFinderGroup = () => {
   const ageGroup = document.querySelector("[data-age-group].is-active")?.dataset.ageGroup ?? "4-6";
 
-  if (ageGroup === "4-6") return "Kleinkinderturnstunde";
-  if (ageGroup === "6-9") return "Kinderturnen";
-  if (ageGroup === "10-14") return "Jugendturnen";
-  return "Erwachsene";
+  if (ageGroup === "4-6") return "kleinkinder";
+  if (ageGroup === "6-9") return "kinder";
+  if (ageGroup === "10-14") return "jugend";
+  return document.querySelector('[data-goal].is-active:not([hidden])')?.dataset.goal ?? 'erwachsene';
+};
+
+const syncQuizGoals = () => {
+  const adult = document.querySelector('[data-age-group].is-active')?.dataset.ageGroup === '15+';
+  goalButtons.forEach(button => {
+    button.hidden = button.dataset.quizAudience !== (adult ? 'adults' : 'kids');
+    if (button.hidden) {
+      button.classList.remove('is-active');
+      button.setAttribute('aria-pressed', 'false');
+    }
+  });
 };
 
 let activeQuizStep = 0;
@@ -187,7 +202,7 @@ let quizIsComplete = false;
 const quizPromptByStep = [
   "Wähle zuerst das Alter aus.",
   "Wähle aus, was beim Training im Vordergrund stehen soll.",
-  "Sag noch kurz, wie viel Turnerfahrung schon vorhanden ist."
+  "Sag noch kurz, wie viel Trainingserfahrung schon vorhanden ist."
 ];
 
 const getQuizButtonsForStep = (stepIndex) => {
@@ -212,6 +227,8 @@ const setQuizStep = (nextStep) => {
     const stepIndex = Number(step.dataset.quizStep ?? 0);
     step.classList.toggle("is-active", stepIndex === activeQuizStep && !quizIsComplete);
     step.classList.toggle("is-complete", stepIndex < activeQuizStep || quizIsComplete);
+    step.inert = stepIndex !== activeQuizStep || quizIsComplete;
+    step.setAttribute('aria-hidden', String(stepIndex !== activeQuizStep || quizIsComplete));
   });
 
   quizProgressItems.forEach((item) => {
@@ -238,7 +255,11 @@ const completeQuiz = () => {
 };
 
 const answerQuizStep = (buttons, selectedButton) => {
-  buttons.forEach((item) => item.classList.toggle("is-active", item === selectedButton));
+  buttons.forEach((item) => {
+    item.classList.toggle("is-active", item === selectedButton);
+    item.setAttribute('aria-pressed', String(item === selectedButton));
+  });
+  if (buttons === ageGroupButtons) syncQuizGoals();
   updateFinder();
   updateQuizNextButton(activeQuizStep);
 };
@@ -247,59 +268,34 @@ const resetQuiz = () => {
   quizIsComplete = false;
   [...ageGroupButtons, ...goalButtons, ...experienceButtons].forEach((button) => {
     button.classList.remove("is-active");
+    button.setAttribute('aria-pressed', 'false');
   });
   quizNextButtons.forEach((button) => {
     button.disabled = true;
   });
+  syncQuizGoals();
   updateFinder();
   setQuizStep(0);
 };
 
 const updateFinder = () => {
   if (!finderTitle || !finderCopy || !finderMail) return;
-
-  const group = getFinderGroup();
-  const activeGoalButton = document.querySelector("[data-goal].is-active");
-  const activeExperienceButton = document.querySelector("[data-experience].is-active");
-  const activeGoal = activeGoalButton?.textContent?.trim() ?? "Spielerisch bewegen und Turngrundlagen lernen";
-  const activeExperience = activeExperienceButton?.textContent?.trim() ?? "Noch keine";
-  const experienceKey = activeExperienceButton?.dataset.experience ?? "keine";
-  const canMentionCompetition = experienceKey === "regelmaessig" && ["Kinderturnen", "Jugendturnen"].includes(group);
-
-  finderTitle.textContent = group;
-  finderCopy.textContent = finderCopyByGroup[group];
+  const key = getFinderGroup();
+  const panel = document.getElementById(`offer-${key}-panel`);
+  if (!panel) return;
+  finderTitle.textContent = panel.querySelector('h3').textContent;
+  finderCopy.textContent = Array.from(panel.querySelectorAll('.offer-copy p')).map(p => p.textContent.trim()).join(' ');
+  const times = Array.from(panel.querySelectorAll('.offer-times p')).map(p => Array.from(p.children).map(item => item.textContent.trim()).join(', ')).join(' · ');
+  const condition = panel.querySelector('.offer-condition')?.textContent.trim();
+  const experience = document.querySelector('[data-experience].is-active')?.dataset.experience;
+  const competitionNote = key === 'jugend' && experience === 'regelmaessig'
+    ? ' Wettkampfturnen ist ausschließlich nach Absprache mit dem Trainerteam möglich.' : '';
   if (finderExtra) {
-    finderExtra.hidden = !canMentionCompetition;
-    finderExtra.textContent = canMentionCompetition
-      ? "Wettkampfturnen wird von unseren TrainerInnen empfohlen, wenn es zum Kind und zum Trainingsstand passt."
-      : "";
+    finderExtra.hidden = false;
+    finderExtra.textContent = times + (condition ? ' · ' + condition : '') + competitionNote;
   }
-  finderMail.textContent =
-    group === "Erwachsene"
-      ? "Erwachsenentraining anfragen"
-      : "Diese Warteliste anfragen";
-  const isFinderWaitlistGroup = ["Kleinkinderturnstunde", "Kinderturnen", "Jugendturnen"].includes(group);
-  const subject = `${isFinderWaitlistGroup ? "Wartelisten-Anfrage" : "Anfrage"} ${group}`;
-  const bodyParts = [
-    "Liebes EWTV-Team,",
-    "",
-    "ich interessiere mich für ein passendes Turnangebot und möchte mich beziehungsweise mein Kind gerne auf die Warteliste setzen lassen.",
-    "",
-    "Aufgrund unserer Angaben wurde folgende Gruppe empfohlen:",
-    "",
-    `Empfohlene Gruppe: ${group}`,
-    `Gewünschter Trainingsschwerpunkt: ${activeGoal}`,
-    `Turnerfahrung: ${activeExperience}`,
-    "",
-    "Name:",
-    "Alter:",
-    "Telefonnummer:",
-    "",
-    "Vielen Dank! Wir freuen uns über eine Rückmeldung, sobald ein passender Platz frei wird.",
-    "Liebe Grüße",
-    "NAME"
-  ];
-  finderMail.href = `mailto:office@ewtv.at?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyParts.join("\r\n"))}`;
+  finderMail.href = `#kontakt-${key}`;
+  finderMail.textContent = ['kleinkinder', 'kinder', 'jugend'].includes(key) ? 'Warteliste anfragen' : 'Training anfragen';
 };
 
 ageGroupButtons.forEach((button) => {
@@ -526,36 +522,6 @@ const renderTrainerProfile = () => {
 };
 
 renderTrainerProfile();
-
-const timelineContent = {
-  tradition: {
-    year: "Tradition",
-    title: "Ein Verein mit Haltung",
-    copy: "Turnen bedeutet Gemeinschaft, Verlässlichkeit und die Freude daran, sich Schritt für Schritt weiterzuentwickeln."
-  },
-  training: {
-    year: "Training",
-    title: "Struktur für jede Stunde",
-    copy: "Gute Turnstunden brauchen klare Abläufe: ankommen, aufwärmen, üben, sichern, abschließen. Genau das macht Fortschritt sichtbar."
-  },
-  heute: {
-    year: "Heute",
-    title: "Wartelisten mit Überblick",
-    copy: "Weil die Kinder- und Jugendgruppen voll sind, hilft eine klare Vormerkung. So bleiben Gruppen stabil und neue Plätze können passend vergeben werden."
-  }
-};
-
-timelineButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const item = timelineContent[button.dataset.year];
-    if (!item || !timelineYear || !timelineTitle || !timelineCopy) return;
-
-    timelineButtons.forEach((entry) => entry.classList.toggle("is-active", entry === button));
-    timelineYear.textContent = item.year;
-    timelineTitle.textContent = item.title;
-    timelineCopy.textContent = item.copy;
-  });
-});
 
 const revealObserver = new IntersectionObserver(
   (entries) => {

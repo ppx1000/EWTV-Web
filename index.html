@@ -28,7 +28,6 @@
       <nav class="main-nav" data-nav>
         <a href="#angebot">Angebot</a>
         <a href="#wochenplan">Wochenplan</a>
-        <a href="#geschichte">Geschichte</a>
         <a href="#beitraege">Mitgliedsbeiträge</a>
         <a href="#QA">Q&A</a>
         <a class="nav-contact" href="#kontakt">Kontakt</a>
@@ -82,154 +81,161 @@
   <div class="section-heading reveal">
     <p class="eyebrow">Programm 2026/27</p>
     <h2>Unsere Sportangebote</h2>
-    <p>Von spielerischer Bewegung über Gerätturnen bis zu Fitness und Gymnastik: Entdecke unser Programm. Kinder- und Jugendgruppen sind aktuell ausgebucht; eine Aufnahme auf die Warteliste ist möglich. Die Teilnahme am Wettkampfturnen erfolgt nach Absprache mit dem Trainerteam.</p>
+    <p>Von spielerischer Bewegung über Gerätturnen bis zu Fitness und Gymnastik: Entdecke unser Programm.</p>
   </div>
-
-  <div class="program-explorer reveal" data-tabs>
-    <div class="program-tabs" role="tablist" aria-label="Sportangebot auswählen">
-      <button class="is-active" type="button" role="tab" aria-selected="true" data-tab="kleinkinder">Kleinkinder</button>
-      <button type="button" role="tab" aria-selected="false" data-tab="kinder">Kinderturnen</button>
-      <button type="button" role="tab" aria-selected="false" data-tab="jugend">Jugendturnen</button>
-      <button type="button" role="tab" aria-selected="false" data-tab="wettkampf">Wettkampfturnen</button>
-      <button type="button" role="tab" aria-selected="false" data-tab="erwachsene">Gerätturnen für Erwachsene</button>
-      <button type="button" role="tab" aria-selected="false" data-tab="kraft">Kraft &amp; Ausdauer</button>
-      <button type="button" role="tab" aria-selected="false" data-tab="bodywork">Bodywork</button>
-      <button type="button" role="tab" aria-selected="false" data-tab="gymnastik">Gymnastik mit Musik</button>
-      <button type="button" role="tab" aria-selected="false" data-tab="wirbelsaeule">Wirbelsäulengymnastik</button>
-      <button type="button" role="tab" aria-selected="false" data-tab="beitraege">Mitgliedsbeiträge</button>
+  <div class="offer-selector" role="tablist" aria-label="Sportangebot auswählen">
+    <div class="offer-choice-group" role="presentation">
+      <span class="offer-group-label">Kinder &amp; Jugend</span>
+      <div class="offer-choices" role="presentation">
+        <button class="offer-choice" type="button" role="tab" id="offer-kleinkinder-tab" aria-controls="offer-kleinkinder-panel" aria-selected="true" tabindex="0">Kleinkinderturnstunde</button>
+        <button class="offer-choice" type="button" role="tab" id="offer-kinder-tab" aria-controls="offer-kinder-panel" aria-selected="false" tabindex="-1">Kinderturnen</button>
+        <button class="offer-choice" type="button" role="tab" id="offer-jugend-tab" aria-controls="offer-jugend-panel" aria-selected="false" tabindex="-1">Jugendturnen</button>
+        <button class="offer-choice" type="button" role="tab" id="offer-wettkampf-tab" aria-controls="offer-wettkampf-panel" aria-selected="false" tabindex="-1">Wettkampfturnen</button>
+      </div>
     </div>
-
-    <div class="program-stage">
-      <article class="program-panel is-active" data-panel="kleinkinder">
-        <span class="icon">K</span>
-        <div>
-          <p class="pill">4–6 Jahre</p>
+    <div class="offer-choice-group" role="presentation">
+      <span class="offer-group-label">Erwachsene &amp; Fitness</span>
+      <div class="offer-choices" role="presentation">
+        <button class="offer-choice" type="button" role="tab" id="offer-erwachsene-tab" aria-controls="offer-erwachsene-panel" aria-selected="false" tabindex="-1">Gerätturnen für Erwachsene</button>
+        <button class="offer-choice" type="button" role="tab" id="offer-kraft-tab" aria-controls="offer-kraft-panel" aria-selected="false" tabindex="-1">Kraft &amp; Ausdauer</button>
+        <button class="offer-choice" type="button" role="tab" id="offer-bodywork-tab" aria-controls="offer-bodywork-panel" aria-selected="false" tabindex="-1">Bodywork</button>
+        <button class="offer-choice" type="button" role="tab" id="offer-gymnastik-tab" aria-controls="offer-gymnastik-panel" aria-selected="false" tabindex="-1">Gymnastik mit Musik</button>
+        <button class="offer-choice" type="button" role="tab" id="offer-wirbelsaeule-tab" aria-controls="offer-wirbelsaeule-panel" aria-selected="false" tabindex="-1">Wirbelsäulengymnastik</button>
+      </div>
+    </div>
+  </div>
+  <div class="offer-stage">
+      <article class="offer-detail" role="tabpanel" id="offer-kleinkinder-panel" aria-labelledby="offer-kleinkinder-tab" tabindex="0">
+        <div class="offer-copy">
+          <span class="offer-audience">4–6 Jahre</span>
           <h3>Kleinkinderturnstunde</h3>
           <p>Spielerisch Bewegung entdecken: Mit einfachen Übungen fördern wir Koordination, Gleichgewicht und Rhythmus und vermitteln erste Turngrundlagen.</p>
-          <ul>
-            <li>Montag, 16:10–17:10 Uhr</li>
-            <li>Aktuell ausgebucht – Aufnahme auf die Warteliste möglich.</li>
-          </ul>
+          
+        </div>
+        <div class="offer-session">
+          <div class="offer-times"><p><strong>Montag</strong><span>16:10–17:10 Uhr</span></p></div>
+          <span class="offer-status">Warteliste</span>
+          <p class="offer-condition">Aktuell ausgebucht – Aufnahme auf die Warteliste möglich.</p>
+          <a class="offer-contact" href="#kontakt-kleinkinder">Warteliste anfragen<span aria-hidden="true"> →</span></a>
         </div>
       </article>
-
-      <article class="program-panel" data-panel="kinder">
-        <span class="icon">K</span>
-        <div>
-          <p class="pill">6–9 Jahre</p>
+      <article class="offer-detail" role="tabpanel" id="offer-kinder-panel" aria-labelledby="offer-kinder-tab" tabindex="0" hidden>
+        <div class="offer-copy">
+          <span class="offer-audience">6–9 Jahre</span>
           <h3>Kinderturnen</h3>
           <p>Mit abwechslungsreichen Übungen festigen wir die Turngrundlagen und fördern Kraft, Beweglichkeit und Koordination. Der Spaß an der Bewegung steht dabei im Mittelpunkt.</p>
-          <ul>
-            <li>Montag, 17:20–18:50 Uhr</li>
-            <li>Aktuell ausgebucht – Aufnahme auf die Warteliste möglich.</li>
-          </ul>
+          
+        </div>
+        <div class="offer-session">
+          <div class="offer-times"><p><strong>Montag</strong><span>17:20–18:50 Uhr</span></p></div>
+          <span class="offer-status">Warteliste</span>
+          <p class="offer-condition">Aktuell ausgebucht – Aufnahme auf die Warteliste möglich.</p>
+          <a class="offer-contact" href="#kontakt-kinder">Warteliste anfragen<span aria-hidden="true"> →</span></a>
         </div>
       </article>
-
-      <article class="program-panel" data-panel="jugend">
-        <span class="icon">J</span>
-        <div>
-          <p class="pill">10–14 Jahre</p>
+      <article class="offer-detail" role="tabpanel" id="offer-jugend-panel" aria-labelledby="offer-jugend-tab" tabindex="0" hidden>
+        <div class="offer-copy">
+          <span class="offer-audience">10–14 Jahre</span>
           <h3>Jugendturnen</h3>
           <p>Wir vertiefen die Turntechnik, trainieren Kraft und Beweglichkeit und erarbeiten neue Elemente. Dabei fördern wir das selbstständige Üben und die Freude am gemeinsamen Training.</p>
-          <ul>
-            <li>Mittwoch, 17:00–18:30 Uhr</li>
-            <li>Aktuell ausgebucht – Aufnahme auf die Warteliste möglich.</li>
-          </ul>
+          
+        </div>
+        <div class="offer-session">
+          <div class="offer-times"><p><strong>Mittwoch</strong><span>17:00–18:30 Uhr</span></p></div>
+          <span class="offer-status">Warteliste</span>
+          <p class="offer-condition">Aktuell ausgebucht – Aufnahme auf die Warteliste möglich.</p>
+          <a class="offer-contact" href="#kontakt-jugend">Warteliste anfragen<span aria-hidden="true"> →</span></a>
         </div>
       </article>
-
-      <article class="program-panel" data-panel="wettkampf">
-        <span class="icon">W</span>
-        <div>
-          <p class="pill">8–14 Jahre</p>
+      <article class="offer-detail" role="tabpanel" id="offer-wettkampf-panel" aria-labelledby="offer-wettkampf-tab" tabindex="0" hidden>
+        <div class="offer-copy">
+          <span class="offer-audience">8–14 Jahre</span>
           <h3>Wettkampfturnen</h3>
           <p>Gezieltes Training zur Vorbereitung auf Wettkämpfe. Wir verfeinern die Technik und erarbeiten Übungen an den Geräten.</p>
-          <ul>
-            <li>Freitag, 16:30–18:30 Uhr</li>
-            <li>Teilnahme nach Absprache mit dem Trainerteam, abhängig vom Trainingsstand und der passenden Gruppe.</li>
-          </ul>
+          
+        </div>
+        <div class="offer-session">
+          <div class="offer-times"><p><strong>Freitag</strong><span>16:30–18:30 Uhr</span></p></div>
+          <span class="offer-status">Nach Absprache</span>
+          <p class="offer-condition">Teilnahme nach Absprache mit dem Trainerteam, abhängig vom Trainingsstand und der passenden Gruppe.</p>
         </div>
       </article>
-
-      <article class="program-panel" data-panel="erwachsene">
-        <span class="icon">E</span>
-        <div>
-          <p class="pill">ab 15 Jahren</p>
+      <article class="offer-detail" role="tabpanel" id="offer-erwachsene-panel" aria-labelledby="offer-erwachsene-tab" tabindex="0" hidden>
+        <div class="offer-copy">
+          <span class="offer-audience">ab 15 Jahren</span>
           <h3>Gerätturnen für Erwachsene</h3>
           <p>Ob du neue Elemente ausprobieren, an deiner Technik feilen oder einfach in Bewegung bleiben möchtest: Beim freien Training an den Geräten gestaltest du dein Training nach deinen eigenen Zielen und in deinem Tempo. Trainerinnen und Trainer sind vor Ort und unterstützen dich mit Tipps und Hilfestellung.</p>
-          <ul>
-            <li>Mittwoch und Freitag, jeweils 18:30–20:00 Uhr</li>
-            <li>Freie Plätze verfügbar – bei Interesse direkt anfragen.</li>
-          </ul>
+          
+        </div>
+        <div class="offer-session">
+          <div class="offer-times"><p><strong>Mittwoch</strong><span>18:30–20:00 Uhr</span></p><p><strong>Freitag</strong><span>18:30–20:00 Uhr</span></p></div>
+          <span class="offer-status">Freie Plätze</span>
+          <p class="offer-condition">Freie Plätze verfügbar – bei Interesse direkt anfragen.</p>
+          <a class="offer-contact" href="#kontakt-erwachsene">Training anfragen<span aria-hidden="true"> →</span></a>
         </div>
       </article>
-
-      <article class="program-panel" data-panel="kraft">
-        <span class="icon">K</span>
-        <div>
-          <p class="pill">Für Damen und Herren</p>
+      <article class="offer-detail" role="tabpanel" id="offer-kraft-panel" aria-labelledby="offer-kraft-tab" tabindex="0" hidden>
+        <div class="offer-copy">
+          <span class="offer-audience">Für Damen und Herren</span>
           <h3>Kraft &amp; Ausdauer</h3>
           <p>Ein vielseitiges Training mit dem eigenen Körpergewicht, TRX und Übungen für Koordination und Kreislauf. Yogaelemente, Atemübungen und Entspannung ergänzen die Stunde und helfen dir, fit für den Alltag zu bleiben.</p>
-          <ul>
-            <li>Montag, 17:20–18:20 Uhr</li>
-            <li>Ideal für Eltern: Trainiere, während dein Kind turnt.</li>
-          </ul>
+          <p>Sie turnen, während Ihr Kind turnt.</p>
+        </div>
+        <div class="offer-session">
+          <div class="offer-times"><p><strong>Montag</strong><span>17:20–18:20 Uhr</span></p></div>
+          
+          
+          <a class="offer-contact" href="#kontakt-kraft">Training anfragen<span aria-hidden="true"> →</span></a>
         </div>
       </article>
-
-      <article class="program-panel" data-panel="bodywork">
-        <span class="icon">B</span>
-        <div>
-          <p class="pill">Für Damen und Herren aller Altersstufen</p>
+      <article class="offer-detail" role="tabpanel" id="offer-bodywork-panel" aria-labelledby="offer-bodywork-tab" tabindex="0" hidden>
+        <div class="offer-copy">
+          <span class="offer-audience">Für Damen und Herren aller Altersstufen</span>
           <h3>Bodywork</h3>
           <p>Ein abwechslungsreiches Ganzkörpertraining zu flotter Musik. Mit und ohne Geräte wie Therabänder, Bälle, Steps und Hanteln kräftigst du die wichtigsten Muskelgruppen, verbesserst deine Koordination und mobilisierst deinen Körper. Die Übungen werden in unterschiedlichen Intensitäten durchgeführt.</p>
-          <ul>
-            <li>Dienstag, 19:00–20:00 Uhr</li>
-          </ul>
+          
+        </div>
+        <div class="offer-session">
+          <div class="offer-times"><p><strong>Dienstag</strong><span>19:00–20:00 Uhr</span></p></div>
+          
+          
+          <a class="offer-contact" href="#kontakt-bodywork">Training anfragen<span aria-hidden="true"> →</span></a>
         </div>
       </article>
-
-      <article class="program-panel" data-panel="gymnastik">
-        <span class="icon">G</span>
-        <div>
-          <p class="pill">Für Damen</p>
+      <article class="offer-detail" role="tabpanel" id="offer-gymnastik-panel" aria-labelledby="offer-gymnastik-tab" tabindex="0" hidden>
+        <div class="offer-copy">
+          <span class="offer-audience">Für Damen</span>
           <h3>Gymnastik mit Musik</h3>
           <p>Gemeinsam und mit musikalischer Begleitung halten wir den ganzen Körper in Bewegung. Abwechslungsreiche Übungen fördern Kraft, Beweglichkeit und Koordination – für Fitness und Wohlbefinden bis ins hohe Alter.</p>
-          <ul>
-            <li>Montag, 19:00–20:00 Uhr</li>
-            <li>Mittwoch, 09:00–10:00 Uhr</li>
-            <li>Am Mittwoch kommen auch Hanteln, Therabänder und Balance-Kissen zum Einsatz. Dehnen und Entspannen runden die Stunde ab.</li>
-          </ul>
+          <p>Am Mittwoch kommen auch Hanteln, Therabänder und Balance-Kissen zum Einsatz. Dehnen und Entspannen runden die Stunde ab.</p>
+        </div>
+        <div class="offer-session">
+          <div class="offer-times"><p><strong>Montag</strong><span>19:00–20:00 Uhr</span></p><p><strong>Mittwoch</strong><span>09:00–10:00 Uhr</span></p></div>
+          
+          
+          <a class="offer-contact" href="#kontakt-gymnastik">Training anfragen<span aria-hidden="true"> →</span></a>
         </div>
       </article>
-
-      <article class="program-panel" data-panel="wirbelsaeule">
-        <span class="icon">W</span>
-        <div>
-          <p class="pill">Für Damen</p>
+      <article class="offer-detail" role="tabpanel" id="offer-wirbelsaeule-panel" aria-labelledby="offer-wirbelsaeule-tab" tabindex="0" hidden>
+        <div class="offer-copy">
+          <span class="offer-audience">Für Damen</span>
           <h3>Wirbelsäulengymnastik</h3>
           <p>Gymnastik mit besonderem Augenmerk auf die Wirbelsäule: Mit gezielten Übungen halten wir den Rücken und die umliegende Muskulatur in Schwung und fördern die Beweglichkeit.</p>
-          <ul>
-            <li>Donnerstag, 09:00–10:00 Uhr</li>
-          </ul>
+          
+        </div>
+        <div class="offer-session">
+          <div class="offer-times"><p><strong>Donnerstag</strong><span>09:00–10:00 Uhr</span></p></div>
+          
+          
+          <a class="offer-contact" href="#kontakt-wirbelsaeule">Training anfragen<span aria-hidden="true"> →</span></a>
         </div>
       </article>
-
-      <article class="program-panel" data-panel="beitraege">
-        <span class="icon">€</span>
-        <div>
-          <p class="pill">Jahresbeitrag</p>
-          <h3>Mitgliedsbeiträge</h3>
-          <p>Der Beitrag gilt jeweils für ein Vereinsjahr.</p>
-          <ul>
-            <li>Kinder, Schüler, Lehrlinge und Studenten: 160 €</li>
-            <li>Erwachsene: 250 €</li>
-          </ul>
-        </div>
-      </article>
-    </div>
   </div>
+    <aside class="sport-fees" aria-label="Mitgliedsbeiträge">
+      <div><h3>Mitgliedsbeiträge</h3><p>Der Beitrag gilt jeweils für ein Vereinsjahr.</p></div>
+      <p><span>Kinder, Schüler, Lehrlinge und Studenten</span><strong>160 €</strong></p>
+      <p><span>Erwachsene</span><strong>250 €</strong></p>
+    </aside>
 </section>
 
       <section class="section finder-section">
@@ -259,18 +265,23 @@
             <div class="quiz-block" data-quiz-step="1">
               <h3>Was soll beim Training im Vordergrund stehen?</h3>
               <div class="quiz-options" aria-label="Trainingsschwerpunkt auswählen">
-                <button type="button" data-goal="grundlagen">Spielerisch bewegen und Turngrundlagen lernen</button>
-                <button type="button" data-goal="elemente">Neue Turnelemente lernen und sicherer werden</button>
-                <button type="button" data-goal="kontrolle">Kraft, Beweglichkeit und Körperkontrolle verbessern</button>
+                <button type="button" data-goal="grundlagen" data-quiz-audience="kids">Spielerisch bewegen und Turngrundlagen lernen</button>
+                <button type="button" data-goal="elemente" data-quiz-audience="kids">Neue Turnelemente lernen und sicherer werden</button>
+                <button type="button" data-goal="kontrolle" data-quiz-audience="kids">Kraft, Beweglichkeit und Körperkontrolle verbessern</button>
+                <button type="button" data-goal="erwachsene" data-quiz-audience="adults" hidden>Gerätturnen und neue Turnelemente</button>
+                <button type="button" data-goal="kraft" data-quiz-audience="adults" hidden>Kraft und Ausdauer für den Alltag</button>
+                <button type="button" data-goal="bodywork" data-quiz-audience="adults" hidden>Ganzkörpertraining mit Geräten und Musik</button>
+                <button type="button" data-goal="gymnastik" data-quiz-audience="adults" hidden>Gymnastik mit Musik für Damen</button>
+                <button type="button" data-goal="wirbelsaeule" data-quiz-audience="adults" hidden>Wirbelsäulengymnastik für Damen</button>
               </div>
               <button class="quiz-next" type="button" data-quiz-next disabled>Weiter</button>
             </div>
             <div class="quiz-block" data-quiz-step="2">
-              <h3>Wie viel Turnerfahrung ist schon vorhanden?</h3>
+              <h3>Wie viel Trainingserfahrung ist schon vorhanden?</h3>
               <div class="quiz-options" aria-label="Turnerfahrung auswählen">
                 <button type="button" data-experience="keine">Noch keine</button>
-                <button type="button" data-experience="erste">Erste turnerische Erfahrungen gesammelt</button>
-                <button type="button" data-experience="regelmaessig">Regelmäßiges Training und sichere Grundlagen</button>
+                <button type="button" data-experience="erste">Erste Erfahrungen gesammelt</button>
+                <button type="button" data-experience="regelmaessig">Regelmäßiges Training</button>
               </div>
               <button class="quiz-next" type="button" data-quiz-next disabled>Ergebnis anzeigen</button>
             </div>
@@ -285,7 +296,7 @@
             <h3 data-finder-title>Kleinkinderturnstunde</h3>
             <p data-finder-copy>Für Kinder von 4 bis 6 Jahren: spielerischer Einstieg, Koordination und erste Turngrundlagen.</p>
             <p class="finder-extra" data-finder-extra hidden></p>
-            <a class="button primary" data-finder-mail href="mailto:office@ewtv.at?subject=Wartelisten-Anfrage%20Kleinkinderturnstunde">Diese Warteliste anfragen</a>
+            <a class="button primary" data-finder-mail href="#kontakt-kleinkinder">Warteliste anfragen</a>
           </div>
         </div>
       </section>
@@ -362,41 +373,6 @@
           <div class="schedule-empty is-hidden" data-day-empty>Keine Turnstunde an diesem Tag eingetragen.</div>
         </div>
         <p class="schedule-note reveal" data-schedule-note>Montag ausgewählt: Wähle eine Stunde, um Details zu sehen.</p>
-      </section>
-
-      <section class="story" id="geschichte">
-        <div class="story-content reveal">
-          <p class="eyebrow">Geschichte</p>
-          <h2>Tradition, die sich weiterbewegt</h2>
-          <p>
-            Der Erste Wiener Turnverein steht für die Idee, dass Turnen mehr ist als Sport: Es verbindet Disziplin, Körpergefühl und Gemeinschaft. Aus dieser Tradition entsteht heute ein lebendiger Verein, der Kindern, Jugendlichen und Erwachsenen einen strukturierten Raum für Bewegung bietet.
-          </p>
-        </div>
-        <div class="story-stack reveal" aria-label="Vereinswerte">
-          <span>Gemeinschaft</span>
-          <span>Technik</span>
-          <span>Verlässlichkeit</span>
-          <span>Freude an Bewegung</span>
-        </div>
-      </section>
-
-      <section class="section timeline-section">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Vereinsgefühl</p>
-          <h2>Von Tradition zu heute</h2>
-        </div>
-        <div class="timeline reveal" data-timeline>
-          <div class="timeline-controls" role="tablist" aria-label="Vereinsphasen">
-            <button class="is-active" type="button" data-year="tradition">Tradition</button>
-            <button type="button" data-year="training">Training</button>
-            <button type="button" data-year="heute">Heute</button>
-          </div>
-          <article class="timeline-panel">
-            <span data-timeline-year>Tradition</span>
-            <h3 data-timeline-title>Ein Verein mit Haltung</h3>
-            <p data-timeline-copy>Turnen bedeutet Gemeinschaft, Verlässlichkeit und die Freude daran, sich Schritt für Schritt weiterzuentwickeln.</p>
-          </article>
-        </div>
       </section>
 
       <section class="section fees-section" id="beitraege">
@@ -506,11 +482,15 @@
             <p>
               Bitte Name, Alter und gewünschte Gruppe angeben. Für Kinder- und Jugendgruppen läuft die Anfrage über die Warteliste. Der Jahresbeitrag beträgt 170 € für Kinder, Schüler, Lehrlinge und Studenten sowie 250 € für Erwachsene.
             </p>
-            <div class="contact-picker" data-contact-picker>
-              <button class="is-active" type="button" data-subject="Kleinkinderturnstunde">Kleinkinder</button>
-              <button type="button" data-subject="Kinderturnen">Kinder</button>
-              <button type="button" data-subject="Jugendturnen">Jugend</button>
-              <button type="button" data-subject="Erwachsene">Erwachsene</button>
+            <div class="contact-picker" data-contact-picker aria-label="Training für die Anfrage auswählen">
+              <button class="is-active" type="button" id="kontakt-kleinkinder" data-subject="Kleinkinderturnstunde" aria-pressed="true">Kleinkinderturnstunde</button>
+              <button type="button" id="kontakt-kinder" data-subject="Kinderturnen" aria-pressed="false">Kinderturnen</button>
+              <button type="button" id="kontakt-jugend" data-subject="Jugendturnen" aria-pressed="false">Jugendturnen</button>
+              <button type="button" id="kontakt-erwachsene" data-subject="Gerätturnen für Erwachsene" aria-pressed="false">Gerätturnen für Erwachsene</button>
+              <button type="button" id="kontakt-kraft" data-subject="Kraft &amp; Ausdauer" aria-pressed="false">Kraft &amp; Ausdauer</button>
+              <button type="button" id="kontakt-bodywork" data-subject="Bodywork" aria-pressed="false">Bodywork</button>
+              <button type="button" id="kontakt-gymnastik" data-subject="Gymnastik mit Musik" aria-pressed="false">Gymnastik mit Musik</button>
+              <button type="button" id="kontakt-wirbelsaeule" data-subject="Wirbelsäulengymnastik" aria-pressed="false">Wirbelsäulengymnastik</button>
             </div>
           </div>
            <a class="button primary mail-button"
@@ -529,7 +509,7 @@
             <strong>Erster Wiener Turnverein</strong><br>
             Turnsaal: Schleifmühlgasse 23, 1040 Wien<br>
             <a href="mailto:office@ewtv.at">office@ewtv.at</a><br>
-            <a href="tel:+43123456789">+43 1 234 56 789</a>
+            <a href="tel:+4315815540">+43 1 581 55 40</a>
           </p>
         </div>
         <div class="footer-column">
