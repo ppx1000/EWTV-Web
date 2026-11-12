@@ -1017,7 +1017,7 @@ button {
   padding: 24px 34px;
   color: var(--ink);
   text-align: left;
-  cursor: pointer;
+  cursor: default;
   background: rgba(255, 253, 248, 0.96);
   border: 0;
   border-left: 10px solid var(--green-300);
@@ -1025,8 +1025,7 @@ button {
   transition: background 180ms ease, transform 180ms ease, opacity 180ms ease;
 }
 
-.schedule-row:hover,
-.schedule-row.is-selected {
+.schedule-row:hover {
   transform: translateX(6px);
   background: #fff;
   box-shadow: 0 20px 58px rgba(0, 0, 0, 0.18);
@@ -1069,15 +1068,6 @@ button {
   display: none;
 }
 
-.schedule-note {
-  min-height: 58px;
-  margin: 18px 0 0;
-  padding: 18px 20px;
-  color: rgba(255, 255, 255, 0.84);
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 8px;
-}
 
 .trainers {
   padding-bottom: 80px;

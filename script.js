@@ -4,7 +4,6 @@ const nav = document.querySelector("[data-nav]");
 const revealItems = document.querySelectorAll(".reveal");
 const filterButtons = document.querySelectorAll("[data-filter]");
 const scheduleRows = document.querySelectorAll("[data-schedule] .schedule-row");
-const scheduleNote = document.querySelector("[data-schedule-note]");
 const scheduleEmpty = document.querySelector("[data-day-empty]");
 const contactButtons = document.querySelectorAll("[data-contact-picker] button");
 const mailLink = document.querySelector("[data-mail-link]");
@@ -92,15 +91,11 @@ const selectScheduleDay = (button) => {
   scheduleRows.forEach((row) => {
     const isVisible = row.dataset.day === day;
     row.classList.toggle("is-hidden", !isVisible);
-    row.classList.remove("is-selected");
     if (isVisible) visibleCount += 1;
   });
 
   scheduleEmpty?.classList.toggle("is-hidden", visibleCount > 0);
 
-  if (scheduleNote) {
-    scheduleNote.textContent = `${button.textContent} ausgewählt: Wähle eine Stunde, um Details zu sehen.`;
-  }
 };
 
 filterButtons.forEach((button) => {
@@ -110,16 +105,6 @@ filterButtons.forEach((button) => {
 if (filterButtons.length > 0) {
   selectScheduleDay(document.querySelector("[data-filter].is-active") ?? filterButtons[0]);
 }
-
-scheduleRows.forEach((row) => {
-  row.addEventListener("click", () => {
-    scheduleRows.forEach((item) => item.classList.remove("is-selected"));
-    row.classList.add("is-selected");
-    if (scheduleNote) {
-      scheduleNote.textContent = row.dataset.note ?? "Details zu dieser Stunde.";
-    }
-  });
-});
 
 const updateMailLink = (group) => {
   if (!mailLink) return;
