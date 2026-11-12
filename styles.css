@@ -2106,3 +2106,31 @@ body.js-enabled .reveal.is-visible {
     font-size: 3rem;
   }
 }
+
+/* A compact indicator follows the visible portion of the page. */
+.scroll-position {
+  position: fixed;
+  z-index: 100;
+  top: 112px;
+  right: 7px;
+  bottom: 24px;
+  width: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(142, 214, 167, 0.24);
+  pointer-events: none;
+  opacity: 0;
+}
+.js-enabled .scroll-position { opacity: 1; }
+.scroll-position[hidden] { display: none; }
+.scroll-position-thumb {
+  position: absolute;
+  inset: 0 0 auto;
+  min-height: 24px;
+  border-radius: inherit;
+  background: var(--green-500);
+  box-shadow: 0 0 0 1px rgba(255, 253, 248, 0.45);
+}
+@media (max-width: 760px) {
+  .scroll-position { top: 96px; right: 3px; bottom: 16px; width: 3px; }
+}
