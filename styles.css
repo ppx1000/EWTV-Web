@@ -613,7 +613,7 @@ button {
 
 .finder {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
   gap: 0;
   width: 100%;
   overflow: hidden;
@@ -634,14 +634,14 @@ button {
 .quiz-progress {
   position: relative;
   z-index: 4;
-  display: inline-flex;
-  justify-self: center;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 7px;
   align-items: center;
-  width: fit-content;
+  width: 100%;
   max-width: 100%;
-  min-height: 48px;
-  padding: 6px 8px;
+  min-height: 64px;
+  padding: 8px;
   background: rgba(255, 253, 248, 0.72);
   border: 1px solid rgba(20, 99, 63, 0.14);
   border-radius: 999px;
@@ -654,12 +654,12 @@ button {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 36px;
-  padding: 0 14px 0 8px;
+  min-height: 46px;
+  padding: 0 8px;
   color: rgba(16, 24, 22, 0.58);
   background: transparent;
   border-radius: 999px;
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   font-weight: 900;
   text-align: center;
   transition: background 180ms ease, color 180ms ease;
@@ -672,14 +672,14 @@ button {
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  width: 28px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
   color: var(--green-900);
   background: #fffdf8;
   border: 1px solid rgba(20, 99, 63, 0.12);
   border-radius: 50%;
   box-shadow: 0 8px 18px rgba(6, 35, 22, 0.08);
-  font-size: 0.76rem;
+  font-size: 0.95rem;
 }
 
 .quiz-progress small {
@@ -2133,4 +2133,14 @@ body.js-enabled .reveal.is-visible {
 }
 @media (max-width: 760px) {
   .scroll-position { top: 96px; left: 4px; bottom: 16px; width: 6px; }
+}
+
+@media (min-width: 561px) and (max-width: 1150px) {
+  .quiz-progress span { flex-direction: column; padding: 8px 4px; }
+}
+@media (max-width: 560px) {
+  .quiz-progress { padding: 8px; gap: 8px; }
+  .quiz-progress span { min-height: 42px; font-size: 0.8rem; gap: 8px; }
+  .quiz-progress b { width: 28px; height: 28px; font-size: 0.85rem; }
+  .quiz-progress small { max-width: none; overflow: visible; }
 }
