@@ -537,3 +537,35 @@ revealItems.forEach((item, index) => {
 
 requestAnimationFrame(revealVisibleItems);
 window.addEventListener("scroll", revealVisibleItems, { passive: true });
+
+
+const scrollPosition = document.querySelector("[data-scroll-position]");
+const scrollThumb = document.querySelector("[data-scroll-thumb]");
+
+if (scrollPosition && scrollThumb) {
+  let scrollPositionPending = false;
+  const updateScrollPosition = () => {
+    scrollPositionPending = false;
+    const pageHeight = document.documentElement.scrollHeight;
+    const viewportHeight = window.innerHeight;
+    const scrollRange = pageHeight - viewportHeight;
+    scrollPosition.hidden = scrollRange <= 0;
+    if (scrollRange <= 0) return;
+
+    const trackHeight = scrollPosition.clientHeight;
+    const thumbHeight = Math.min(trackHeight, Math.max(24, trackHeight * viewportHeight / pageHeight));
+    const progress = Math.min(1, Math.max(0, window.scrollY / scrollRange));
+    scrollThumb.style.height = `${thumbHeight}px`;
+    scrollThumb.style.transform = `translateY(${progress * (trackHeight - thumbHeight)}px)`;
+  };
+  const scheduleScrollPosition = () => {
+    if (scrollPositionPending) return;
+    scrollPositionPending = true;
+    requestAnimationFrame(updateScrollPosition);
+  };
+  window.addEventListener("scroll", scheduleScrollPosition, { passive: true });
+  window.addEventListener("resize", scheduleScrollPosition);
+  window.addEventListener("load", scheduleScrollPosition);
+  new ResizeObserver(scheduleScrollPosition).observe(document.body);
+  scheduleScrollPosition();
+}
