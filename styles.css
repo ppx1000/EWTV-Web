@@ -10,6 +10,8 @@
   --muted: #5d6864;
   --line: rgba(16, 24, 22, 0.12);
   --shadow: 0 24px 70px rgba(6, 35, 22, 0.18);
+  --section-space: 72px;
+  --heading-space: 28px;
 }
 
 * {
@@ -18,8 +20,8 @@
 
 #angebot { scroll-margin-top: 110px; }
 #angebot .offer-selector { display: grid; gap: 18px; margin-bottom: 24px; }
-#angebot .offer-choice-group { display: grid; grid-template-columns: 152px minmax(0,1fr); gap: 18px; align-items: start; }
-#angebot .offer-group-label { padding-top: 14px; color: var(--green-700); font-size: .8rem; font-weight: 700; }
+#angebot .offer-choice-group { display: grid; grid-template-columns: 215px minmax(0,1fr); gap: 18px; align-items: start; }
+#angebot .offer-group-label { padding-top: 10px; color: var(--green-700); font-size: 1.1rem; font-weight: 800; line-height: 1.4; white-space: nowrap; }
 #angebot .offer-choices { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
 #angebot .offer-choice { padding: 12px 15px; min-height: 46px; max-width: 100%; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--green-850); font: inherit; font-size: .88rem; font-weight: 700; line-height: 1.4; text-align: left; cursor: pointer; overflow-wrap: anywhere; transition: color 160ms ease, background 160ms ease, border-color 160ms ease; }
 #angebot .offer-choice { background: rgba(142,214,167,.12); border-color: rgba(20,99,63,.23); }
@@ -377,16 +379,16 @@ button {
 .section {
   width: min(1120px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 110px 0 0;
+  padding: var(--section-space) 0 0;
 }
 
 .section.overlap {
-  padding-top: 130px;
+  padding-top: var(--section-space);
 }
 
 .section-heading {
   width: min(680px, 100%);
-  margin-bottom: 34px;
+  margin-bottom: var(--heading-space);
 }
 
 .section-heading h2,
@@ -591,7 +593,7 @@ button {
 .schedule-section {
   width: 100%;
   padding-inline: max(16px, calc((100vw - 1120px) / 2));
-  padding-bottom: 100px;
+  padding-bottom: var(--section-space);
   background:
     linear-gradient(180deg, rgba(247, 244, 236, 0) 0%, var(--green-950) 18%),
     var(--green-950);
@@ -599,7 +601,7 @@ button {
 }
 
 .finder-section {
-  padding-bottom: 100px;
+  padding-bottom: var(--section-space);
 }
 
 .finder,
@@ -966,7 +968,7 @@ button {
 }
 
 .schedule-section .section-heading {
-  padding-top: 70px;
+  padding-top: 0;
 }
 
 .schedule-section .section-heading p {
@@ -1622,8 +1624,8 @@ button {
 }
 
 .section.fees-section {
-  padding-top: 92px;
-  padding-bottom: 92px;
+  padding-top: var(--section-space);
+  padding-bottom: var(--section-space);
 }
 
 .fee-grid {
@@ -1680,12 +1682,71 @@ button {
 }
 
 .contact-section {
-  padding: 0 16px 96px;
+  padding: 0 16px var(--section-space);
 }
 
 .section.faq-section {
   padding-top: 0;
-  padding-bottom: 92px;
+  padding-bottom: var(--section-space);
+}
+
+.faq-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 24px;
+  padding: 8px;
+  border: 1px solid rgba(20, 99, 63, .12);
+  border-radius: 20px;
+  background: rgba(142, 214, 167, .10);
+}
+
+.faq-tab,
+.faq-contact-button {
+  padding: 12px 15px;
+  border: 1px solid rgba(20, 99, 63, .23);
+  border-radius: 8px;
+  background: rgba(142, 214, 167, .12);
+  color: var(--green-850);
+  font: inherit;
+  font-size: .88rem;
+  font-weight: 700;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.faq-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 14px;
+}
+.faq-tabs .faq-tab {
+  justify-content: space-between;
+  text-align: left;
+  background: transparent;
+  border-color: transparent;
+}
+.faq-tabs .faq-tab[aria-selected="true"] {
+  color: var(--paper);
+  background: var(--green-850);
+  box-shadow: 0 4px 12px rgba(6, 35, 22, .12);
+}
+@media (max-width: 900px) {
+  .faq-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.faq-tab:hover,
+.faq-contact-button:hover {
+  background: rgba(142, 214, 167, .28);
+  border-color: var(--green-700);
+}
+
+.faq-tab[aria-selected="true"] {
+  background: var(--green-850);
+  border-color: var(--green-850);
+  color: var(--paper);
 }
 
 .faq-list {
@@ -1693,30 +1754,44 @@ button {
   gap: 12px;
 }
 
+.faq-list[hidden],
+.faq-answer[hidden] {
+  display: none;
+}
+
 .faq-item {
-  overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--paper);
   box-shadow: 0 14px 44px rgba(6, 35, 22, 0.08);
 }
 
-.faq-item button {
+.faq-question {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.faq-question button {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
   width: 100%;
   padding: 22px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
   color: var(--ink);
+  font: inherit;
+  font-weight: 800;
+  line-height: 1.5;
   text-align: left;
   cursor: pointer;
-  background: transparent;
-  border: 0;
-  font-weight: 800;
 }
 
-.faq-item strong {
+.faq-question button > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+
+.faq-icon {
   display: grid;
   flex: 0 0 auto;
   place-items: center;
@@ -1725,27 +1800,101 @@ button {
   color: #fff;
   background: var(--green-700);
   border-radius: 8px;
-  transition: transform 180ms ease;
+  font-size: 1.3rem;
+  font-weight: 800;
 }
 
-.faq-item p {
-  max-height: 0;
-  margin: 0;
-  padding: 0 22px;
+.faq-answer {
+  padding: 0 22px 22px;
   color: var(--muted);
   line-height: 1.65;
-  opacity: 0;
-  transition: max-height 260ms ease, padding 260ms ease, opacity 260ms ease;
+  overflow-wrap: anywhere;
 }
 
-.faq-item.is-open p {
-  max-height: 220px;
-  padding: 0 22px 22px;
-  opacity: 1;
+.faq-answer p { margin: 0; }
+.faq-answer p + p { margin-top: 14px; }
+.faq-answer a { color: var(--green-700); text-decoration: underline; text-underline-offset: 3px; }
+.faq-tab:focus-visible,
+.faq-question button:focus-visible,
+.faq-answer a:focus-visible,
+.faq-contact-button:focus-visible {
+  outline: 3px solid var(--green-500);
+  outline-offset: 3px;
 }
 
-.faq-item.is-open strong {
-  transform: rotate(45deg);
+.faq-topics {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 0 28px;
+  align-items: start;
+}
+
+.faq-tabs { grid-column: 1 / -1; }
+.faq-list { grid-column: 1; grid-row: 2; min-width: 0; }
+
+.faq-contact {
+  position: relative;
+  isolation: isolate;
+  grid-column: 2;
+  grid-row: 2;
+  padding: 30px;
+  border: 1px solid rgba(142, 214, 167, .25);
+  border-radius: 16px;
+  background: var(--green-850);
+  color: var(--paper);
+  overflow: hidden;
+}
+
+.faq-contact::before,
+.faq-contact::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 240px;
+  height: 240px;
+  border: 1px solid rgba(142, 214, 167, .18);
+  border-radius: 50%;
+  top: -115px;
+  right: -100px;
+  pointer-events: none;
+}
+.faq-contact::after { width: 300px; height: 300px; top: -145px; right: -130px; }
+.faq-contact-art {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  margin-bottom: 32px;
+  border: 1px solid rgba(142, 214, 167, .5);
+  border-radius: 20px 20px 20px 5px;
+  color: var(--green-300);
+  font-size: 2.2rem;
+  font-weight: 700;
+  transform: rotate(-8deg);
+}
+.faq-contact p { margin: 0; color: #d9e9df; font-size: .9rem; line-height: 1.7; }
+.faq-contact .faq-contact-label { color: var(--green-300); font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.faq-contact h3 { margin: 12px 0 18px; font-size: 1.6rem; line-height: 1.2; }
+.faq-contact-button { display: inline-flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; margin-top: 26px; background: var(--green-300); color: var(--green-950); }
+.faq-contact-button:hover { background: var(--paper); }
+
+@media (max-width: 800px) {
+  .faq-topics { grid-template-columns: minmax(0, 1fr); }
+  .faq-contact { grid-column: 1; grid-row: 3; margin-top: 24px; padding: 24px; }
+  .faq-contact-art { float: right; margin: 0 0 16px 20px; }
+  .faq-contact h3 br { display: none; }
+  .faq-contact-button { width: auto; }
+}
+
+@media (max-width: 600px) {
+  .faq-tabs { gap: 6px; margin-bottom: 16px; }
+  .faq-tab { padding: 10px 12px; font-size: .82rem; }
+  .faq-question button { padding: 16px; gap: 12px; }
+  .faq-answer { padding: 0 16px 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-tab, .faq-question button, .faq-contact-button { transition: none; }
 }
 
 .contact-card {
@@ -2022,7 +2171,7 @@ body.js-enabled .reveal.is-visible {
 
   .section,
   .section.overlap {
-    padding-top: 82px;
+    padding-top: var(--section-space);
   }
 
   .story-content,
@@ -2107,34 +2256,6 @@ body.js-enabled .reveal.is-visible {
   }
 }
 
-/* A compact indicator follows the visible portion of the page. */
-.scroll-position {
-  position: fixed;
-  z-index: 100;
-  top: 112px;
-  left: 8px;
-  bottom: 24px;
-  width: 9px;
-  overflow: hidden;
-  border-radius: 999px;
-  background: rgba(142, 214, 167, 0.24);
-  pointer-events: none;
-  opacity: 0;
-}
-.js-enabled .scroll-position { opacity: 1; }
-.scroll-position[hidden] { display: none; }
-.scroll-position-thumb {
-  position: absolute;
-  inset: 0 0 auto;
-  min-height: 24px;
-  border-radius: inherit;
-  background: var(--green-500);
-  box-shadow: 0 0 0 1px rgba(255, 253, 248, 0.45);
-}
-@media (max-width: 760px) {
-  .scroll-position { top: 96px; left: 4px; bottom: 16px; width: 6px; }
-}
-
 @media (min-width: 561px) and (max-width: 1150px) {
   .quiz-progress span { flex-direction: column; padding: 8px 4px; }
 }
@@ -2143,4 +2264,390 @@ body.js-enabled .reveal.is-visible {
   .quiz-progress span { min-height: 42px; font-size: 0.8rem; gap: 8px; }
   .quiz-progress b { width: 28px; height: 28px; font-size: 0.85rem; }
   .quiz-progress small { max-width: none; overflow: visible; }
+}
+
+#sportcheck { scroll-margin-top: 110px; }
+
+/* A shared rhythm for the homepage on smaller screens. */
+@media (max-width: 760px) {
+  :root {
+    --section-space: 48px;
+    --heading-space: 24px;
+  }
+}
+
+/* Gentle movement and green accents across the homepage. */
+.main-nav a {
+  position: relative;
+}
+.main-nav a:not(.nav-contact)::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 4px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--green-300);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms ease;
+}
+.main-nav a:hover::after,
+.main-nav a:focus-visible::after { transform: scaleX(1); }
+
+.section-heading h2::after {
+  content: "";
+  display: block;
+  width: 58px;
+  height: 4px;
+  margin-top: 18px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--green-500), var(--green-300));
+}
+
+.schedule-section {
+  background:
+    radial-gradient(ellipse at 95% 10%, rgba(30, 155, 99, .16), transparent 52%),
+    var(--green-950);
+}
+
+.faq-item,
+.fee-card,
+.schedule-tools button {
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+.faq-icon {
+  transition: background 200ms ease, transform 200ms ease;
+}
+.faq-item.is-open .faq-icon {
+  background: var(--green-500);
+}
+.faq-item.is-open {
+  border-color: rgba(20, 99, 63, .4);
+}
+.faq-contact-button span,
+#angebot .offer-contact span {
+  display: inline-block;
+  transition: transform 200ms ease;
+}
+.faq-contact-button:hover span,
+#angebot .offer-contact:hover span { transform: translateX(4px); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero > img { animation: heroSettle 1400ms ease-out both; }
+  .faq-list:not([hidden]) { animation: contentArrive 280ms ease-out both; }
+  .faq-answer:not([hidden]) { animation: contentArrive 220ms ease-out both; }
+  .schedule-row:not([hidden]):not(.head) { animation: scheduleArrive 260ms ease-out; }
+  .section-heading.is-visible h2::after { animation: accentArrive 600ms ease-out both; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .faq-item:hover,
+  .fee-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(20, 99, 63, .35);
+    box-shadow: 0 18px 42px rgba(6, 35, 22, .12);
+  }
+  .schedule-tools button:hover { transform: translateY(-3px); border-color: var(--green-300); }
+}
+
+@keyframes heroSettle {
+  from { transform: scale(1.045); opacity: .75; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes contentArrive {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes accentArrive {
+  from { transform: scaleX(.25); transform-origin: left; opacity: 0; }
+  to { transform: scaleX(1); transform-origin: left; opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  body.js-enabled .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes scheduleArrive {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* A calm, unified welcome using the website's own colors and type. */
+.welcome-screen { display: none; }
+.show-welcome .welcome-screen {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--green-950);
+  color: var(--paper);
+  pointer-events: none;
+  animation: welcomeFade 3200ms ease-in-out both;
+}
+.welcome-mark {
+  display: grid;
+  justify-items: center;
+  gap: 24px;
+  width: min(100%, 900px);
+  text-align: center;
+}
+.welcome-word {
+  font-size: clamp(1.8rem, 4.5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+.welcome-walkway { width: min(240px, 65vw); }
+.welcome-loading-track {
+  display: block;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(142, 214, 167, .18);
+}
+.welcome-loading-track > span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--green-300);
+  border-radius: inherit;
+  transform-origin: left;
+  animation: welcomeProgress 3200ms cubic-bezier(.4, 0, .2, 1) both;
+}
+.welcome-percentage {
+  display: block;
+  margin-top: 12px;
+  color: var(--green-300);
+  font-size: .8rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+@keyframes welcomeProgress {
+  0% { transform: scaleX(0); }
+  67%, 100% { transform: scaleX(1); }
+}
+@keyframes welcomeFade {
+  0%, 76% { opacity: 1; }
+  90%, 100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .show-welcome .welcome-screen { animation: welcomeFade 350ms linear both !important; }
+  .welcome-loading-track > span { animation: none !important; transform: scaleX(1); }
+}
+
+.welcome-word { filter: blur(0); transition: filter 850ms cubic-bezier(.4, 0, .2, 1); }
+.welcome-screen.is-loaded .welcome-word { filter: blur(2px); }
+@media (prefers-reduced-motion: reduce) {
+  .welcome-word { transition: none; }
+}
+
+/* Match the FAQ contact card to the page's gentle interactions. */
+.faq-contact-art {
+  transition: transform 350ms cubic-bezier(.2, .8, .2, 1), background 250ms ease;
+}
+.faq-contact::before,
+.faq-contact::after {
+  transition: transform 550ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .faq-contact:hover .faq-contact-art {
+    transform: rotate(6deg) translateY(-4px);
+    background: rgba(142, 214, 167, .1);
+  }
+  .faq-contact:hover::before { transform: translate(-8px, 8px); }
+  .faq-contact:hover::after { transform: translate(-15px, 15px); }
+}
+.faq-contact:focus-within .faq-contact-art {
+  transform: rotate(6deg) translateY(-4px);
+  background: rgba(142, 214, 167, .1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-contact-art, .faq-contact::before, .faq-contact::after { transition: none; }
+  .faq-contact:hover .faq-contact-art,
+  .faq-contact:focus-within .faq-contact-art { transform: rotate(-8deg); }
+  .faq-contact:hover::before, .faq-contact:hover::after { transform: none; }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  body.js-enabled .faq-contact.reveal.is-visible:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 48px rgba(6, 35, 22, .2);
+  }
+  body.js-enabled .faq-contact.reveal.is-visible {
+    transition: opacity 700ms ease, transform 280ms ease, box-shadow 280ms ease;
+    transition-delay: 0ms !important;
+  }
+}
+
+.main-nav a[aria-current="location"] {
+  background: rgba(142, 214, 167, .22);
+  box-shadow: inset 0 0 0 1px rgba(142, 214, 167, .45);
+}
+.main-nav a[aria-current="location"]::after { transform: scaleX(1); }
+.main-nav .nav-contact[aria-current="location"] {
+  background: var(--green-700);
+  box-shadow: inset 0 0 0 2px var(--green-300);
+}
+
+/* Gentle movement for the main contact panel and its choices. */
+body.js-enabled .contact-card.reveal.is-visible {
+  transition: opacity 700ms ease, transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+  transition-delay: 0ms !important;
+}
+.contact-picker button {
+  transition: transform 200ms ease, background 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  body.js-enabled .contact-card.reveal.is-visible:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 65px rgba(6, 35, 22, .16);
+    border-color: rgba(20, 99, 63, .3);
+  }
+  .contact-picker button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(6, 35, 22, .08);
+    border-color: var(--green-700);
+  }
+  .contact-picker button:active { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.js-enabled .contact-card.reveal.is-visible,
+  .contact-picker button { transition: none; }
+}
+
+/* Keep the FAQ heading visible below the fixed navigation. */
+#QA { scroll-margin-top: 130px; }
+@media (max-width: 760px) {
+  #QA { scroll-margin-top: 110px; }
+}
+
+/* Animate the original intro cards without changing their appearance. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  body.js-enabled .intro-panel.reveal.is-visible {
+    transition: opacity 700ms ease, transform 280ms ease, box-shadow 280ms ease;
+    transition-delay: 0ms !important;
+  }
+  body.js-enabled .intro-panel.reveal.is-visible:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 28px 80px rgba(6, 35, 22, .22);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro-panel:hover { transform: none; }
+}
+
+/* Animate the capacity notice while preserving its existing design. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  body.js-enabled .capacity-card.reveal.is-visible {
+    transition: opacity 700ms ease, transform 280ms ease, box-shadow 280ms ease;
+    transition-delay: 0ms !important;
+  }
+  body.js-enabled .capacity-card.reveal.is-visible:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, .24);
+  }
+}
+
+/* Movement for the existing sports offer components. */
+#angebot .offer-detail {
+  transition: transform 280ms ease, box-shadow 280ms ease;
+}
+#angebot .offer-choice {
+  transition: color 160ms ease, background 160ms ease, border-color 160ms ease, transform 200ms ease;
+}
+#angebot .sport-fees {
+  transition: transform 280ms ease, box-shadow 280ms ease;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  #angebot .offer-detail:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 24px 48px rgba(6, 35, 22, .14);
+  }
+  #angebot .offer-choice:hover { transform: translateY(-3px); }
+  #angebot .sport-fees:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(6, 35, 22, .08);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #angebot .offer-detail, #angebot .offer-choice, #angebot .sport-fees { transition: none; }
+}
+
+#angebot > .section-heading p { max-width: none; }
+
+/* Phone layout: readable text, wrapping controls and comfortable touch targets. */
+@media (max-width: 760px) {
+  .site-header { gap: 12px; padding: 10px 12px; }
+  .brand { min-width: 0; }
+  .main-nav { max-height: calc(100dvh - 110px); overflow-y: auto; overscroll-behavior: contain; }
+  .main-nav a { display: flex; align-items: center; min-height: 48px; }
+  .hero-content { padding: 130px 0 28px; }
+  .hero h1 { font-size: clamp(2.25rem, 9.5vw, 4rem); line-height: 1.06; overflow-wrap: break-word; }
+  .hero-copy { margin-top: 20px; font-size: 1rem; }
+  .hero-actions { gap: 10px; margin-top: 24px; }
+  .hero-actions .button { width: 100%; min-height: 48px; }
+  .capacity-card { padding: 20px; margin-bottom: 24px; }
+  .intro-grid { gap: 14px; }
+  .intro-panel { padding: 22px; }
+  .section-heading { margin-bottom: 24px; }
+  .section-heading h2,
+  #angebot > .section-heading h2,
+  .finder-section > .section-heading h2,
+  #wochenplan > .section-heading h2,
+  .contact-card h2 {
+    font-size: clamp(1.65rem, 6.5vw, 2.3rem);
+    line-height: 1.15;
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+  #angebot .offer-group-label { font-size: 1.05rem; }
+  #angebot .offer-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #angebot .offer-choice { min-height: 48px; padding: 12px; font-size: .85rem; }
+  #angebot .offer-detail { padding: 20px; }
+  #angebot .offer-session::before { inset: 0 -20px -20px; }
+  #angebot .offer-contact { width: 100%; min-height: 48px; }
+  .finder-controls { padding: 20px; min-height: 0; }
+  .finder-result { padding: 22px; min-height: 280px; }
+  .quiz-progress { grid-template-columns: repeat(4, minmax(0, 1fr)); border-radius: 16px; gap: 4px; padding: 6px; }
+  .quiz-progress span { flex-direction: column; gap: 4px; padding: 6px 2px; font-size: .7rem; }
+  .quiz-progress small { max-width: none; font-size: .65rem; white-space: normal; }
+  .quiz-options button { min-height: 48px; line-height: 1.4; }
+  .quiz-next { width: 100%; min-height: 48px; }
+  .schedule-tools { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin-top: 0; }
+  .schedule-tools button { min-height: 56px; padding: 10px 4px; }
+  .schedule { padding: 12px; gap: 12px; }
+  .schedule-row { padding: 18px 14px; gap: 10px; min-width: 0; overflow-wrap: anywhere; }
+  .fee-card { padding: 24px; }
+  .faq-tabs { gap: 6px; padding: 6px; border-radius: 16px; }
+  .faq-tabs .faq-tab { min-height: 48px; padding: 12px 10px; font-size: .82rem; }
+  .faq-question { font-size: .95rem; }
+  .faq-answer { font-size: .95rem; }
+  .faq-contact { padding: 24px; }
+  .contact-card { min-width: 0; padding: 22px; gap: 24px; }
+  .contact-picker { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .contact-picker button { min-width: 0; min-height: 48px; padding: 10px; font-size: .85rem; line-height: 1.4; }
+  .mail-button { min-width: 0; width: 100%; min-height: 48px; white-space: normal; }
+  .footer-inner { gap: 28px; }
+  .footer-bottom { flex-wrap: wrap; gap: 12px; text-align: left; }
+  #angebot, #sportcheck, #wochenplan, #beitraege, #QA, #kontakt { scroll-margin-top: 105px; }
+}
+@media (max-width: 360px) {
+  #angebot .offer-choices, .contact-picker { grid-template-columns: minmax(0, 1fr); }
+  .faq-tabs { grid-template-columns: minmax(0, 1fr); }
+}
+@media (pointer: coarse) {
+  .intro-panel:hover, .schedule-row:hover { transform: none; }
 }

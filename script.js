@@ -1,3 +1,60 @@
+(() => {
+  const welcome = document.querySelector("[data-welcome]");
+  if (!welcome) return;
+  const root = document.documentElement;
+  const preview = false;
+  const percentage = welcome.querySelector("[data-welcome-percentage]");
+  const fill = welcome.querySelector(".welcome-loading-track > span");
+  let progressFrame;
+  const updateProgress = () => {
+    if (!percentage || !fill) return;
+    const transform = getComputedStyle(fill).transform;
+    const scale = transform === "none" ? 1 : new DOMMatrixReadOnly(transform).a;
+    const progress = Math.round(Math.max(0, Math.min(1, scale)) * 100);
+    percentage.textContent = `${progress} %`;
+    welcome.classList.toggle("is-loaded", progress >= 99);
+    progressFrame = requestAnimationFrame(updateProgress);
+  };
+  const startProgress = () => {
+    cancelAnimationFrame(progressFrame);
+    if (percentage) percentage.textContent = "0 %";
+    welcome.classList.remove("is-loaded");
+    progressFrame = requestAnimationFrame(updateProgress);
+  };
+  let cycleTimer;
+  let finished = false;
+  window.clearTimeout(window.ewtvWelcomeFallback);
+  const finish = () => {
+    if (finished) return;
+    finished = true;
+    cancelAnimationFrame(progressFrame);
+    window.clearTimeout(cycleTimer);
+    root.classList.remove("show-welcome");
+    if (preview) {
+      cycleTimer = window.setTimeout(() => {
+        finished = false;
+        root.classList.add("show-welcome");
+        startProgress();
+        cycleTimer = window.setTimeout(finish, 3600);
+      }, 650);
+    } else {
+      welcome.remove();
+    }
+  };
+  if (!root.classList.contains("show-welcome")) {
+    finish();
+    return;
+  }
+  welcome.addEventListener("animationend", (event) => {
+    if (event.target === welcome) finish();
+  });
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) finish();
+  });
+  startProgress();
+  cycleTimer = window.setTimeout(finish, 3600);
+})();
+
 const header = document.querySelector("[data-header]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const nav = document.querySelector("[data-nav]");
@@ -47,17 +104,25 @@ const setHeaderState = () => {
 setHeaderState();
 window.addEventListener("scroll", setHeaderState, { passive: true });
 
-menuToggle.addEventListener("click", () => {
-  const isOpen = nav.classList.toggle("is-open");
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-});
-
+const setMenuOpen = (open) => {
+  nav.classList.toggle("is-open", open);
+  menuToggle.setAttribute("aria-expanded", String(open));
+  menuToggle.setAttribute("aria-label", open ? "Menü schließen" : "Menü öffnen");
+};
+menuToggle.addEventListener("click", () => setMenuOpen(!nav.classList.contains("is-open")));
 nav.addEventListener("click", (event) => {
-  if (event.target instanceof HTMLAnchorElement) {
-    nav.classList.remove("is-open");
-    menuToggle.setAttribute("aria-expanded", "false");
+  if (event.target.closest("a")) setMenuOpen(false);
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && nav.classList.contains("is-open")) {
+    setMenuOpen(false);
+    menuToggle.focus();
   }
 });
+document.addEventListener("click", (event) => {
+  if (!header.contains(event.target)) setMenuOpen(false);
+});
+window.matchMedia("(max-width: 920px)").addEventListener("change", () => setMenuOpen(false));
 
 const offerTabs = Array.from(document.querySelectorAll("#angebot .offer-choice"));
 const selectOffer = (selected, focus = false) => {
@@ -145,19 +210,40 @@ window.addEventListener('hashchange', selectContactFromHash);
 if (contactButtons.length) selectContact(contactButtons[0]);
 selectContactFromHash();
 
+const faqTabs = Array.from(document.querySelectorAll("[data-faq] [role='tab']"));
+const selectFaqTopic = (selected, focus = false) => {
+  faqTabs.forEach((tab) => {
+    const active = tab === selected;
+    tab.setAttribute("aria-selected", String(active));
+    tab.tabIndex = active ? 0 : -1;
+    document.getElementById(tab.getAttribute("aria-controls")).hidden = !active;
+  });
+  if (focus) selected.focus();
+};
+
+faqTabs.forEach((tab, index) => {
+  tab.addEventListener("click", () => selectFaqTopic(tab));
+  tab.addEventListener("keydown", (event) => {
+    let next;
+    if (event.key === "ArrowRight") next = (index + 1) % faqTabs.length;
+    if (event.key === "ArrowLeft") next = (index - 1 + faqTabs.length) % faqTabs.length;
+    if (event.key === "Home") next = 0;
+    if (event.key === "End") next = faqTabs.length - 1;
+    if (next === undefined) return;
+    event.preventDefault();
+    selectFaqTopic(faqTabs[next], true);
+  });
+});
+
 faqItems.forEach((item) => {
   const button = item.querySelector("button");
-
-  button?.addEventListener("click", () => {
-    const shouldOpen = !item.classList.contains("is-open");
-
-    faqItems.forEach((faq) => {
-      faq.classList.remove("is-open");
-      faq.querySelector("button")?.setAttribute("aria-expanded", "false");
-    });
-
-    item.classList.toggle("is-open", shouldOpen);
-    button.setAttribute("aria-expanded", String(shouldOpen));
+  const answer = item.querySelector(".faq-answer");
+  button.addEventListener("click", () => {
+    const open = button.getAttribute("aria-expanded") !== "true";
+    button.setAttribute("aria-expanded", String(open));
+    answer.hidden = !open;
+    item.classList.toggle("is-open", open);
+    item.querySelector(".faq-icon").textContent = open ? "−" : "+";
   });
 });
 
@@ -538,34 +624,35 @@ revealItems.forEach((item, index) => {
 requestAnimationFrame(revealVisibleItems);
 window.addEventListener("scroll", revealVisibleItems, { passive: true });
 
-
-const scrollPosition = document.querySelector("[data-scroll-position]");
-const scrollThumb = document.querySelector("[data-scroll-thumb]");
-
-if (scrollPosition && scrollThumb) {
-  let scrollPositionPending = false;
-  const updateScrollPosition = () => {
-    scrollPositionPending = false;
-    const pageHeight = document.documentElement.scrollHeight;
-    const viewportHeight = window.innerHeight;
-    const scrollRange = pageHeight - viewportHeight;
-    scrollPosition.hidden = scrollRange <= 0;
-    if (scrollRange <= 0) return;
-
-    const trackHeight = scrollPosition.clientHeight;
-    const thumbHeight = Math.min(trackHeight, Math.max(24, trackHeight * viewportHeight / pageHeight));
-    const progress = Math.min(1, Math.max(0, window.scrollY / scrollRange));
-    scrollThumb.style.height = `${thumbHeight}px`;
-    scrollThumb.style.transform = `translateY(${progress * (trackHeight - thumbHeight)}px)`;
-  };
-  const scheduleScrollPosition = () => {
-    if (scrollPositionPending) return;
-    scrollPositionPending = true;
-    requestAnimationFrame(updateScrollPosition);
-  };
-  window.addEventListener("scroll", scheduleScrollPosition, { passive: true });
-  window.addEventListener("resize", scheduleScrollPosition);
-  window.addEventListener("load", scheduleScrollPosition);
-  new ResizeObserver(scheduleScrollPosition).observe(document.body);
-  scheduleScrollPosition();
-}
+// Highlight the navigation entry for the section currently being viewed.
+const sectionLinks = Array.from(document.querySelectorAll("[data-nav] a[href^='#']"));
+const navigationSections = sectionLinks.map((link) => ({
+  link,
+  section: document.getElementById(link.hash.slice(1)),
+})).filter(({ section }) => section);
+let navigationFramePending = false;
+const updateCurrentSection = () => {
+  navigationFramePending = false;
+  const marker = header.getBoundingClientRect().bottom + 48;
+  let current = null;
+  navigationSections.forEach((entry) => {
+    if (entry.section.getBoundingClientRect().top <= marker) current = entry;
+  });
+  if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) {
+    current = navigationSections[navigationSections.length - 1];
+  }
+  navigationSections.forEach(({ link }) => {
+    if (current?.link === link) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
+};
+const scheduleCurrentSection = () => {
+  if (navigationFramePending) return;
+  navigationFramePending = true;
+  requestAnimationFrame(updateCurrentSection);
+};
+window.addEventListener("scroll", scheduleCurrentSection, { passive: true });
+window.addEventListener("resize", scheduleCurrentSection);
+window.addEventListener("load", scheduleCurrentSection);
+new ResizeObserver(scheduleCurrentSection).observe(document.body);
+scheduleCurrentSection();
