@@ -5,14 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Erster Wiener Turnverein: Turnstunden, Wartelisten, Trainerteam und Kontakt.">
     <title>Erster Wiener Turnverein</title>
+    <script>
+      (() => {
+        const key = "ewtv-intro-seen";
+        const navigation = performance.getEntriesByType("navigation")[0];
+        let seen = false;
+        try {
+          seen = sessionStorage.getItem(key) === "1";
+          sessionStorage.setItem(key, "1");
+        } catch (_) { /* Navigation type still prevents an intro on reload. */ }
+        const preview = false;
+        if (preview || (!seen && navigation?.type !== "reload" && navigation?.type !== "back_forward")) {
+          document.documentElement.classList.add("show-welcome");
+          // Reveal the page even if the main script fails to load.
+          window.ewtvWelcomeFallback = window.setTimeout(() => document.documentElement.classList.remove("show-welcome"), 4000);
+        }
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20261112-finder-larger">
+    <link rel="stylesheet" href="styles.css?v=20261113-mobile-faq">
   </head>
   <body>
-    <div class="scroll-position" aria-hidden="true" data-scroll-position>
-      <span class="scroll-position-thumb" data-scroll-thumb></span>
+    <div class="welcome-screen" aria-hidden="true" data-welcome>
+      <div class="welcome-mark">
+        <span class="welcome-word">Erster Wiener Turnverein</span>
+        <div class="welcome-walkway">
+        <span class="welcome-loading-track" aria-hidden="true"><span></span></span>
+        <span class="welcome-percentage" data-welcome-percentage>0 %</span>
+        </div>
+      </div>
     </div>
     <header class="site-header" data-header>
       <a class="brand" href="#start" aria-label="Erster Wiener Turnverein Startseite">
@@ -30,6 +53,7 @@
       </button>
       <nav class="main-nav" data-nav>
         <a href="#angebot">Angebot</a>
+        <a href="#sportcheck">Sportcheck</a>
         <a href="#wochenplan">Wochenplan</a>
         <a href="#beitraege">Mitgliedsbeiträge</a>
         <a href="#QA">Q&A</a>
@@ -84,7 +108,7 @@
   <div class="section-heading reveal">
     <p class="eyebrow">Programm 2026/27</p>
     <h2>Unsere Sportangebote</h2>
-    <p>Von spielerischer Bewegung über Gerätturnen bis zu Fitness und Gymnastik: Entdecke unser Programm.</p>
+    <p>Von spielerischer Bewegung über Gerätturnen bis zu Fitness und Gymnastik: Entdecke unser Programm!</p>
   </div>
   <div class="offer-selector" role="tablist" aria-label="Sportangebot auswählen">
     <div class="offer-choice-group" role="presentation">
@@ -188,6 +212,8 @@
           <div class="offer-times"><p><strong>Montag</strong><span>17:20–18:20 Uhr</span></p></div>
           
           
+          <span class="offer-status">Freie Plätze</span>
+          <p class="offer-condition">Freie Plätze verfügbar – bei Interesse direkt anfragen.</p>
           <a class="offer-contact" href="#kontakt-kraft">Training anfragen<span aria-hidden="true"> →</span></a>
         </div>
       </article>
@@ -202,6 +228,8 @@
           <div class="offer-times"><p><strong>Dienstag</strong><span>19:00–20:00 Uhr</span></p></div>
           
           
+          <span class="offer-status">Freie Plätze</span>
+          <p class="offer-condition">Freie Plätze verfügbar – bei Interesse direkt anfragen.</p>
           <a class="offer-contact" href="#kontakt-bodywork">Training anfragen<span aria-hidden="true"> →</span></a>
         </div>
       </article>
@@ -216,6 +244,8 @@
           <div class="offer-times"><p><strong>Montag</strong><span>19:00–20:00 Uhr</span></p><p><strong>Mittwoch</strong><span>09:00–10:00 Uhr</span></p></div>
           
           
+          <span class="offer-status">Freie Plätze</span>
+          <p class="offer-condition">Freie Plätze verfügbar – bei Interesse direkt anfragen.</p>
           <a class="offer-contact" href="#kontakt-gymnastik">Training anfragen<span aria-hidden="true"> →</span></a>
         </div>
       </article>
@@ -230,6 +260,8 @@
           <div class="offer-times"><p><strong>Donnerstag</strong><span>09:00–10:00 Uhr</span></p></div>
           
           
+          <span class="offer-status">Freie Plätze</span>
+          <p class="offer-condition">Freie Plätze verfügbar – bei Interesse direkt anfragen.</p>
           <a class="offer-contact" href="#kontakt-wirbelsaeule">Training anfragen<span aria-hidden="true"> →</span></a>
         </div>
       </article>
@@ -241,9 +273,9 @@
     </aside>
 </section>
 
-      <section class="section finder-section">
+      <section class="section finder-section" id="sportcheck">
         <div class="section-heading reveal">
-          <p class="eyebrow">Interaktiver Finder</p>
+          <p class="eyebrow">Sportcheck</p>
           <h2>Welche Gruppe passt?</h2>
           <p>Ein paar kurze Fragen beantworten, dann schlägt die Website die passende Gruppe und den nächsten Schritt vor.</p>
         </div>
@@ -397,82 +429,242 @@
         </div>
       </section>
 
-      <section class="section faq-section" id="QA">
+      <section class="section faq-section" id="QA" aria-labelledby="faq-title">
         <div class="section-heading reveal">
-          <p class="eyebrow">Warteliste & Ablauf</p>
-          <h2>Häufige Fragen</h2>
+          <p class="eyebrow">Schnell die passende Antwort</p>
+          <h2 id="faq-title">Häufige Fragen</h2>
         </div>
-        <div class="faq-list reveal" data-faq>
-          <article class="faq-item is-open">
-            <button type="button" aria-expanded="true">
-              <span>1. Kann ich mein Kind anmelden, wenn die Kinder- und Jugendgruppen voll sind?</span>
-              <strong>+</strong>
-            </button>
-            <p>Ja. Auch wenn derzeit kein Platz in den Kinder- oder Jugendgruppen frei ist, kann Ihr Kind auf die Warteliste der passenden Turnstunde gesetzt werden. Sobald ein Platz frei wird, werden Sie per E-Mail kontaktiert.</p>
-          </article>
-          <article class="faq-item">
-            <button type="button" aria-expanded="false">
-              <span>2. Wie wird die Warteliste gereiht?</span>
-              <strong>+</strong>
-            </button>
-            <p>Die Kinder werden nach dem Zeitpunkt der eingegangenen Anfrage gereiht und in die entsprechende Warteliste aufgenommen.</p>
-          </article>
-          <article class="faq-item">
-            <button type="button" aria-expanded="false">
-              <span>3. Wie lange bleibt mein Kind auf der Warteliste?</span>
-              <strong>+</strong>
-            </button>
-            <p>Ihr Kind bleibt auf der Warteliste, bis ein passender Platz frei wird. Eine erneute Anmeldung ist nicht notwendig.</p>
-          </article>
-          <article class="faq-item">
-            <button type="button" aria-expanded="false">
-              <span>4. Was passiert, wenn ein Platz frei wird?</span>
-              <strong>+</strong>
-            </button>
-            <p>Sobald ein Platz frei ist, erhalten Sie eine E-Mail. Bitte antworten Sie innerhalb von zwei Wochen. Erfolgt innerhalb dieser Frist keine Rückmeldung, wird das Kind von der Warteliste genommen und der Platz dem nächsten Kind angeboten.</p>
-          </article>
-          <article class="faq-item">
-            <button type="button" aria-expanded="false">
-              <span>5. Ist ein Einstieg während des Turnjahres möglich?</span>
-              <strong>+</strong>
-            </button>
-            <p>Ja. Die Wartelisten werden während des gesamten Turnjahres regelmäßig aktualisiert. Sobald ein Platz frei wird, kann ein Kind auch unter dem Jahr einsteigen.</p>
-          </article>
-          <article class="faq-item">
-            <button type="button" aria-expanded="false">
-              <span>6. Hat mein Kind nach der Aufnahme einen fixen Platz?</span>
-              <strong>+</strong>
-            </button>
-            <p>Ja. Sobald Ihr Kind aufgenommen wurde, ist es Mitglied des Vereins und hat einen festen Platz im Verein. Je nach Alter und Entwicklung kann es später in eine passende andere Turnstunde aufsteigen.</p>
-          </article>
-          <article class="faq-item">
-            <button type="button" aria-expanded="false">
-              <span>7. Dürfen Eltern während der Turnstunde dabei sein?</span>
-              <strong>+</strong>
-            </button>
-            <p>Bei den Kleinkindergruppen dürfen Eltern während der ersten drei Turnstunden dabei sein. Danach sollen die Kinder ohne Begleitung teilnehmen. So können sie sich besser auf die Turnstunde konzentrieren und werden nicht dadurch abgelenkt, dass sie zwischendurch zu ihren Eltern laufen oder etwas zeigen möchten.</p>
-          </article>
-          <article class="faq-item">
-            <button type="button" aria-expanded="false">
-              <span>8. Welche Schuhe sind in der Turnhalle erlaubt?</span>
-              <strong>+</strong>
-            </button>
-            <p>Straßenschuhe sind in der Turnhalle nicht erlaubt. Die Kinder können barfuß, mit rutschfesten Socken oder mit Turnpatschen teilnehmen.</p>
-          </article>
-          <article class="faq-item">
-            <button type="button" aria-expanded="false">
-              <span>9. Darf mein Kind in der Halle essen oder trinken?</span>
-              <strong>+</strong>
-            </button>
-            <p>In der Turnhalle selbst darf nicht gegessen oder getrunken werden. Im Verein gibt es aber eine Trinkecke, in der die Kinder trinken dürfen. Bitte geben Sie Ihrem Kind daher immer eine Wasserflasche mit.</p>
-          </article>
-          <article class="faq-item">
-            <button type="button" aria-expanded="false">
-              <span>10. Was gilt bei Krankheit oder einer Abmeldung?</span>
-              <strong>+</strong>
-            </button>
-            <p>Bei Krankheit dürfen TurnerInnen aus Sicherheitsgründen nicht am Training teilnehmen. Möchte ein Kind dauerhaft nicht mehr teilnehmen, kann es per E-Mail oder persönlich bei den Trainerinnen und Trainern abgemeldet werden.</p>
-          </article>
+        <div class="faq-topics" data-faq>
+          <div class="faq-tabs" role="tablist" aria-label="Fragen nach Thema">
+            <button class="faq-tab" type="button" role="tab" id="faq-tab-start" aria-controls="faq-panel-start" aria-selected="true" tabindex="0">Start &amp; Teilnahme</button>
+            <button class="faq-tab" type="button" role="tab" id="faq-tab-angebot" aria-controls="faq-panel-angebot" aria-selected="false" tabindex="-1">Angebot &amp; Verein</button>
+            <button class="faq-tab" type="button" role="tab" id="faq-tab-training" aria-controls="faq-panel-training" aria-selected="false" tabindex="-1">Rund ums Training</button>
+            <button class="faq-tab" type="button" role="tab" id="faq-tab-kinder" aria-controls="faq-panel-kinder" aria-selected="false" tabindex="-1">Warteliste &amp; Aufnahme</button>
+          </div>
+          <div class="faq-list" role="tabpanel" id="faq-panel-start" aria-labelledby="faq-tab-start">
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-1" aria-controls="faq-answer-1" aria-expanded="false">
+                  <span>Wie kann ich mich oder mein Kind anmelden?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-1" aria-labelledby="faq-question-1" hidden>
+                <p>Nutzen Sie unter <a href="#angebot">„Angebot“</a> die Schaltfläche „Training anfragen“ bei der gewünschten Sportstunde. Bei ausgebuchten Gruppen können Sie über „Warteliste anfragen“ die Aufnahme auf die Warteliste anfragen.</p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-2" aria-controls="faq-answer-2" aria-expanded="false">
+                  <span>Sind Schnupperstunden möglich?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-2" aria-labelledby="faq-question-2" hidden>
+                <p>Ja, Schnupperstunden sind jederzeit nach vorheriger Absprache mit dem Verein möglich. Nutzen Sie dafür die Anfrage beim gewünschten <a href="#angebot">Angebot</a>.</p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-3" aria-controls="faq-answer-3" aria-expanded="false">
+                  <span>Ist ein Einstieg während des Vereinsjahres möglich?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-3" aria-labelledby="faq-question-3" hidden>
+                <p>Für Kinder und Jugendliche ist ein Einstieg möglich, sobald ein passender Platz frei wird. Für die Erwachsenenangebote klären Sie den Einstieg bitte direkt mit dem Verein.</p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-5" aria-controls="faq-answer-5" aria-expanded="false">
+                  <span>Wie kann ich mich oder mein Kind dauerhaft abmelden?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-5" aria-labelledby="faq-question-5" hidden>
+                <p>Wenn Sie oder Ihr Kind dauerhaft nicht mehr teilnehmen möchten, können Sie sich beziehungsweise Ihr Kind per E-Mail an <a href="mailto:office@ewtv.at">office@ewtv.at</a> oder persönlich bei den Trainerinnen und Trainern abmelden.</p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-19" aria-controls="faq-answer-19" aria-expanded="false">
+                  <span>Ist eine anteilige Beitragszahlung bei späterem Einstieg möglich?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-19" aria-labelledby="faq-question-19" hidden>
+                <p>Es gibt ausschließlich Jahresbeiträge. Eine semesterweise oder anteilige Beitragszahlung ist nicht möglich. Der Mitgliedsbeitrag gilt jeweils für ein Vereinsjahr.</p>
+              </div>
+            </article>
+          </div>
+          <div class="faq-list" role="tabpanel" id="faq-panel-angebot" aria-labelledby="faq-tab-angebot" hidden>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-4" aria-controls="faq-answer-4" aria-expanded="false">
+                  <span>Welches Angebot passt zu mir oder meinem Kind?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-4" aria-labelledby="faq-question-4" hidden>
+                <p>Unser Programm umfasst Kinder-, Jugend- und Wettkampfturnen sowie Gerätturnen für Erwachsene, Kraft &amp; Ausdauer, Bodywork, Gymnastik mit Musik und Wirbelsäulengymnastik. Beschreibungen, Altersgruppen und Trainingszeiten finden Sie unter <a href="#angebot">„Angebot“</a> und im <a href="#wochenplan">Wochenplan</a>. Die Teilnahme am Wettkampfturnen erfolgt nach Absprache mit dem Trainerteam.</p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-20" aria-controls="faq-answer-20" aria-expanded="false">
+                  <span>Welche Turngruppen gibt es für Kinder und Jugendliche?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-20" aria-labelledby="faq-question-20" hidden>
+                <p><strong>Kleinkinderturnstunde:</strong> 4–6 Jahre, Montag von 16:10 bis 17:10 Uhr.</p>
+                <p><strong>Kinderturnen:</strong> 6–9 Jahre, Montag von 17:20 bis 18:50 Uhr.</p>
+                <p><strong>Jugendturnen:</strong> 10–14 Jahre, Mittwoch von 17:00 bis 18:30 Uhr.</p>
+                <p><strong>Wettkampfturnen:</strong> 8–14 Jahre, Freitag von 16:30 bis 18:30 Uhr.</p>
+                <p>Die Teilnahme am Wettkampfturnen erfolgt nach Absprache mit dem Trainerteam und hängt vom Trainingsstand und der passenden Gruppe ab. Weitere Informationen finden Sie unter <a href="#angebot">Angebot</a> und im <a href="#wochenplan">Wochenplan</a>.</p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-21" aria-controls="faq-answer-21" aria-expanded="false">
+                  <span>Welche Angebote gibt es für Erwachsene?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-21" aria-labelledby="faq-question-21" hidden>
+                <p><strong>Gerätturnen ab 15 Jahren:</strong> Mittwoch und Freitag von 18:30 bis 20:00 Uhr.</p>
+                <p><strong>Kraft &amp; Ausdauer für Damen und Herren:</strong> Montag von 17:20 bis 18:20 Uhr.</p>
+                <p><strong>Bodywork für Damen und Herren aller Altersstufen:</strong> Dienstag von 19:00 bis 20:00 Uhr.</p>
+                <p><strong>Gymnastik mit Musik für Damen:</strong> Montag von 19:00 bis 20:00 Uhr und Mittwoch von 09:00 bis 10:00 Uhr.</p>
+                <p><strong>Wirbelsäulengymnastik für Damen:</strong> Donnerstag von 09:00 bis 10:00 Uhr.</p>
+                <p>Beim Gerätturnen für Erwachsene sind derzeit freie Plätze verfügbar. Für die übrigen Angebote fragen Sie bitte direkt beim Verein an. Beschreibungen finden Sie unter <a href="#angebot">Angebot</a>. Der <a href="#sportcheck">Sportcheck</a> hilft Ihnen, ein passendes Angebot zu finden.</p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-18" aria-controls="faq-answer-18" aria-expanded="false">
+                  <span>Wer steht hinter dem EWTV?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-18" aria-labelledby="faq-question-18" hidden>
+                <p>Hinter dem EWTV steht der Turnrat. Er kümmert sich um die Organisation und Verwaltung des Vereins, trifft Entscheidungen und gestaltet die Weiterentwicklung des Vereins mit. Gemeinsam mit den Trainerinnen und Trainern schafft er die Rahmenbedingungen für den Turnbetrieb und ein lebendiges Vereinsleben.</p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-10" aria-controls="faq-answer-10" aria-expanded="false">
+                  <span>Wo findet das Training statt und wie erreiche ich den Verein?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-10" aria-labelledby="faq-question-10" hidden>
+                <p>Unser Turnsaal befindet sich in der Schleifmühlgasse 23, 1040 Wien. Sie erreichen uns per E-Mail an <a href="mailto:office@ewtv.at">office@ewtv.at</a> oder telefonisch unter <a href="tel:+4315815540">+43 1 581 55 40</a>.</p>
+              </div>
+            </article>
+          </div>
+          <div class="faq-list" role="tabpanel" id="faq-panel-training" aria-labelledby="faq-tab-training" hidden>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-6" aria-controls="faq-answer-6" aria-expanded="false">
+                  <span>Welche Kleidung und Schuhe brauche ich?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-6" aria-labelledby="faq-question-6" hidden>
+                <p>Bitte tragen Sie Sportkleidung. Straßenschuhe sind in der Turnhalle nicht erlaubt. Beim Kinderturnen ist die Teilnahme barfuß, mit rutschfesten Socken oder Turnpatschen möglich. Für andere Angebote erkundigen Sie sich bitte bei der jeweiligen Trainingsleitung nach geeigneten Hallenschuhen. Als Ohrringe sind ausschließlich Stecker erlaubt.</p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-7" aria-controls="faq-answer-7" aria-expanded="false">
+                  <span>Darf ich in der Halle essen oder trinken?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-7" aria-labelledby="faq-question-7" hidden>
+                <p>In der Turnhalle selbst darf nicht gegessen oder getrunken werden. Zum Trinken steht eine eigene Trinkecke zur Verfügung. Bitte bringen Sie eine Wasserflasche mit.</p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-8" aria-controls="faq-answer-8" aria-expanded="false">
+                  <span>Was gilt bei Krankheit?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-8" aria-labelledby="faq-question-8" hidden>
+                <p>Bei Krankheit ist eine Teilnahme am Training nicht möglich. Ihr Kind muss für einzelne krankheitsbedingt versäumte Einheiten nicht abgemeldet werden.</p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-9" aria-controls="faq-answer-9" aria-expanded="false">
+                  <span>Findet in den Schulferien oder an Feiertagen Training statt?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-9" aria-labelledby="faq-question-9" hidden>
+                <p>Unser Trainingsbetrieb richtet sich nach dem Schuljahr. In den Schulferien und an gesetzlichen Feiertagen findet kein Training statt.</p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-12" aria-controls="faq-answer-12" aria-expanded="false">
+                  <span>Dürfen Eltern während der Turnstunde dabei sein?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-12" aria-labelledby="faq-question-12" hidden>
+                <p>Bei den Kleinkindergruppen dürfen Eltern während der ersten drei Turnstunden dabei sein. Danach nehmen die Kinder ohne Begleitung teil, damit sie sich besser auf die Turnstunde konzentrieren können.</p>
+              </div>
+            </article>
+          </div>
+          <div class="faq-list" role="tabpanel" id="faq-panel-kinder" aria-labelledby="faq-tab-kinder" hidden>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-11" aria-controls="faq-answer-11" aria-expanded="false">
+                  <span>Kann ich mein Kind anmelden, wenn die Kinder- und Jugendgruppen voll sind?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-11" aria-labelledby="faq-question-11" hidden>
+                <p>Ja. Für ausgebuchte Kinder- und Jugendgruppen führen wir Wartelisten. Nutzen Sie beim gewünschten <a href="#angebot">Angebot</a> die Schaltfläche „Warteliste anfragen“. Für die Verfügbarkeit von Erwachsenenangeboten nutzen Sie bitte die Anfrage beim jeweiligen Angebot.</p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-14" aria-controls="faq-answer-14" aria-expanded="false">
+                  <span>Wie wird die Warteliste gereiht?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-14" aria-labelledby="faq-question-14" hidden>
+                <p>Die Reihung erfolgt nach Eingang der Anfrage.</p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-15" aria-controls="faq-answer-15" aria-expanded="false">
+                  <span>Wie lange bleibt mein Kind auf der Warteliste?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-15" aria-labelledby="faq-question-15" hidden>
+                <p>Ihr Kind bleibt auf der Warteliste, bis ein passender Platz frei wird. Eine erneute Anmeldung ist nicht notwendig. Eine bestimmte Wartezeit können wir nicht nennen.</p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-16" aria-controls="faq-answer-16" aria-expanded="false">
+                  <span>Was passiert, wenn ein Platz frei wird?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-16" aria-labelledby="faq-question-16" hidden>
+                <p>Sobald ein Platz frei wird, verständigen wir Sie per E-Mail. Bitte antworten Sie innerhalb von 14 Tagen. Ohne Rückmeldung wird Ihr Kind von der Warteliste genommen und der Platz weitergegeben.</p>
+              </div>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-question">
+                <button type="button" id="faq-question-13" aria-controls="faq-answer-13" aria-expanded="false">
+                  <span>Hat mein Kind nach der Aufnahme einen festen Platz?</span><span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div class="faq-answer" id="faq-answer-13" aria-labelledby="faq-question-13" hidden>
+                <p>Nach der Aufnahme hat Ihr Kind einen festen Platz im Verein. Je nach Alter und Entwicklung kann es später in eine andere passende Turnstunde wechseln.</p>
+              </div>
+            </article>
+          </div>
+          <aside class="faq-contact reveal" aria-label="Persönlicher Kontakt">
+            <span class="faq-contact-art" aria-hidden="true">?</span>
+            <p class="faq-contact-label">Wir helfen Ihnen weiter</p>
+            <h3>Ist etwas unbeantwortet geblieben?</h3>
+            <p>Schreiben Sie uns – gemeinsam finden wir für Sie das passende Angebot!</p>
+            <a class="faq-contact-button" href="#kontakt">Kontakt aufnehmen <span aria-hidden="true">→</span></a>
+          </aside>
         </div>
       </section>
 
@@ -529,6 +721,6 @@
       </div>
     </footer>
 
-    <script src="script.js?v=20261112-scroll-position"></script>
+    <script src="script.js?v=20261113-mobile-faq"></script>
   </body>
 </html>
