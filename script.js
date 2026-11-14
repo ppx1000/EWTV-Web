@@ -672,3 +672,69 @@ window.addEventListener("resize", scheduleCurrentSection);
 window.addEventListener("load", scheduleCurrentSection);
 new ResizeObserver(scheduleCurrentSection).observe(document.body);
 scheduleCurrentSection();
+
+// Opt-in sensor control: horizontal phone turns reveal the corresponding photo area.
+(() => {
+  const hero = document.querySelector(".hero");
+  const control = document.querySelector("[data-hero-look]");
+  const mobile = window.matchMedia("(max-width: 760px)");
+  if (!hero || !control || !window.isSecureContext || !window.DeviceOrientationEvent) return;
+  let enabled = false;
+  let origin = null;
+  let sensorTimer;
+  const label = () => { control.textContent = enabled ? "Bewegung ausschalten" : "Durch Bewegen umsehen"; };
+  const onOrientation = (event) => {
+    if (!enabled || !mobile.matches || document.hidden) return;
+    const yaw = Number.isFinite(event.alpha) ? event.alpha : null;
+    const tilt = Number.isFinite(event.gamma) ? event.gamma : null;
+    if (yaw === null && tilt === null) return;
+    window.clearTimeout(sensorTimer);
+    const mode = yaw !== null ? "yaw" : "tilt";
+    const value = yaw ?? tilt;
+    if (!origin || origin.mode !== mode) origin = { mode, value };
+    const delta = ((value - origin.value + 540) % 360) - 180;
+    const x = Math.max(0, Math.min(100, 50 + (mode === "yaw" ? -delta : delta) * 2));
+    hero.style.setProperty("--hero-look-x", `${x}%`);
+  };
+  const stop = () => {
+    enabled = false;
+    origin = null;
+    window.clearTimeout(sensorTimer);
+    window.removeEventListener("deviceorientation", onOrientation);
+    hero.classList.remove("is-motion-enabled");
+    hero.style.removeProperty("--hero-look-x");
+    control.setAttribute("aria-pressed", "false");
+    label();
+  };
+  control.addEventListener("click", async () => {
+    if (enabled) { stop(); return; }
+    control.disabled = true;
+    try {
+      if (typeof DeviceOrientationEvent.requestPermission === "function") {
+        const permission = await DeviceOrientationEvent.requestPermission();
+        if (permission !== "granted") {
+          control.textContent = "Bewegung nicht freigegeben – erneut versuchen";
+          return;
+        }
+      }
+      enabled = true;
+      origin = null;
+      hero.classList.add("is-motion-enabled");
+      control.setAttribute("aria-pressed", "true");
+      label();
+      window.addEventListener("deviceorientation", onOrientation, { passive: true });
+      sensorTimer = window.setTimeout(() => {
+        stop();
+        control.textContent = "Keine Bewegungsdaten – erneut versuchen";
+      }, 4000);
+    } catch (_) {
+      stop();
+      control.textContent = "Bewegung nicht verfügbar – erneut versuchen";
+    } finally { control.disabled = false; }
+  });
+  const sync = () => { stop(); control.hidden = !mobile.matches; };
+  mobile.addEventListener("change", sync);
+  window.addEventListener("orientationchange", () => { origin = null; });
+  document.addEventListener("visibilitychange", () => { origin = null; });
+  sync();
+})();

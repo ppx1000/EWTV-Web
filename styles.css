@@ -2673,13 +2673,27 @@ body.js-enabled .contact-card.reveal.is-visible {
   white-space: nowrap;
 }
 
-/* Show more of the hall photo with a slow pan on phones. */
-@media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
-  .hero > img {
-    animation: heroMobilePan 22s ease-in-out infinite alternate;
+.hero-look-control { display: none; }
+@media (max-width: 760px) {
+  .hero-look-control:not([hidden]) {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: 16px;
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 253, 248, .45);
+    border-radius: 8px;
+    background: rgba(6, 35, 22, .65);
+    color: var(--paper);
+    font: inherit;
+    font-size: .85rem;
+    cursor: pointer;
   }
-}
-@keyframes heroMobilePan {
-  0%, 8% { object-position: 0% 50%; }
-  92%, 100% { object-position: 100% 50%; }
+  .hero-look-control:focus-visible { outline: 3px solid var(--green-300); outline-offset: 4px; }
+  .hero.is-motion-enabled > img {
+    animation: none;
+    transform: none;
+    object-position: var(--hero-look-x, 50%) 50%;
+    transition: object-position 120ms linear;
+  }
 }
