@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20261113-mobile-faq">
+    <link rel="stylesheet" href="styles.css?v=20261114-contact-update">
   </head>
   <body>
     <div class="welcome-screen" aria-hidden="true" data-welcome>
@@ -340,7 +340,7 @@
         <div class="section-heading reveal">
           <p class="eyebrow">Wochenplan</p>
           <h2>Wann was stattfindet</h2>
-          <p>Wähle einen Tag aus und sieh direkt, welche Turnstunden stattfinden. Wartelisten gelten für Kinder- und Jugendgruppen.</p>
+          <p>Wähle einen Tag aus und sieh direkt, welche Turnstunden stattfinden.</p>
         </div>
         <div class="schedule-tools reveal" aria-label="Wochentag auswählen">
           <button class="is-active" type="button" data-filter="mo">Mo</button>
@@ -674,10 +674,11 @@
             <p class="eyebrow">Kontakt</p>
             <h2>Kontakt für Anfragen</h2>
             <p>
-              Bitte Name, Alter und gewünschte Gruppe angeben. Für Kinder- und Jugendgruppen läuft die Anfrage über die Warteliste. Der Jahresbeitrag beträgt 160 € für Kinder, Schüler, Lehrlinge und Studenten sowie 250 € für Erwachsene.
+              Fragen oder Lust aufs Mitturnen? Wir freuen uns auf Ihre Nachricht!
             </p>
-            <div class="contact-picker" data-contact-picker aria-label="Training für die Anfrage auswählen">
-              <button class="is-active" type="button" id="kontakt-kleinkinder" data-subject="Kleinkinderturnstunde" aria-pressed="true">Kleinkinderturnstunde</button>
+            <div class="contact-picker" data-contact-picker aria-label="Thema der Anfrage auswählen">
+              <button class="is-active" type="button" id="kontakt-allgemein" data-subject="Allgemeine Anfrage" aria-pressed="true">Allgemeine Anfrage</button>
+              <button type="button" id="kontakt-kleinkinder" data-subject="Kleinkinderturnstunde" aria-pressed="false">Kleinkinderturnstunde</button>
               <button type="button" id="kontakt-kinder" data-subject="Kinderturnen" aria-pressed="false">Kinderturnen</button>
               <button type="button" id="kontakt-jugend" data-subject="Jugendturnen" aria-pressed="false">Jugendturnen</button>
               <button type="button" id="kontakt-erwachsene" data-subject="Gerätturnen für Erwachsene" aria-pressed="false">Gerätturnen für Erwachsene</button>
@@ -689,7 +690,7 @@
           </div>
            <a class="button primary mail-button"
               data-mail-link
-              href="mailto:office@ewtv.at?subject=Wartelisten-Anfrage%20Kleinkinderturnstunde&body=Liebes%20EWTV-Team%2C%0D%0A%0D%0Aich%20m%C3%B6chte%20mich%20bzw.%20mein%20Kind%20gerne%20auf%20die%20Warteliste%20setzen%20lassen.%0D%0A%0D%0AName%3A%0D%0AAlter%3A%0D%0AGew%C3%BCnschte%20Gruppe%3A%20Kleinkinderturnstunde%0D%0ATelefonnummer%3A%0D%0A%0D%0AVielen%20Dank!">            Mail an office@ewtv.at
+              href="mailto:office@ewtv.at?subject=Allgemeine%20Anfrage">Allgemeine Anfrage senden
           </a>
         </div>
       </section>
@@ -721,6 +722,6 @@
       </div>
     </footer>
 
-    <script src="script.js?v=20261113-mobile-faq"></script>
+    <script src="script.js?v=20261114-contact-update"></script>
   </body>
 </html>

@@ -124,6 +124,16 @@ document.addEventListener("click", (event) => {
 });
 window.matchMedia("(max-width: 920px)").addEventListener("change", () => setMenuOpen(false));
 
+document.querySelector(".brand")?.addEventListener("click", (event) => {
+  event.preventDefault();
+  setMenuOpen(false);
+  history.replaceState(null, "", "#start");
+  window.scrollTo({
+    top: 0,
+    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+  });
+});
+
 const offerTabs = Array.from(document.querySelectorAll("#angebot .offer-choice"));
 const selectOffer = (selected, focus = false) => {
   offerTabs.forEach((tab) => {
@@ -173,13 +183,18 @@ if (filterButtons.length > 0) {
 
 const updateMailLink = (group) => {
   if (!mailLink) return;
+  if (group === 'Allgemeine Anfrage') {
+    mailLink.href = 'mailto:office@ewtv.at?subject=' + encodeURIComponent('Allgemeine Anfrage');
+    mailLink.textContent = 'Allgemeine Anfrage senden';
+    return;
+  }
   const waitlist = ['Kleinkinderturnstunde', 'Kinderturnen', 'Jugendturnen'].includes(group);
   const subject = (waitlist ? 'Wartelisten-Anfrage ' : 'Anfrage ') + group;
   const body = [
     'Liebes EWTV-Team,', '',
     waitlist ? 'ich möchte mich bzw. mein Kind gerne auf die Warteliste setzen lassen.'
       : 'ich interessiere mich für das folgende Training und möchte gerne weitere Informationen erhalten.',
-    '', 'Name:', ...(waitlist ? ['Alter:'] : []), 'Gewünschte Gruppe: ' + group, 'Telefonnummer:', '', 'Vielen Dank!'
+    '', 'Name:', ...(waitlist ? ['Alter:'] : []), 'Gewünschte Gruppe: ' + group, '', 'Vielen Dank!'
   ].join('\r\n');
   mailLink.href = 'mailto:office@ewtv.at?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
   mailLink.textContent = waitlist ? 'Warteliste anfragen' : 'Training anfragen';
@@ -196,6 +211,7 @@ contactButtons.forEach(button => button.addEventListener('click', () => selectCo
 const selectContactFromHash = () => {
   const button = Array.from(contactButtons).find(item => '#' + item.id === window.location.hash);
   if (button) selectContact(button);
+  else if (window.location.hash === '#kontakt' && contactButtons.length) selectContact(contactButtons[0]);
 };
 document.querySelectorAll('#angebot .offer-contact, [data-finder-mail]').forEach(link => {
   link.addEventListener('click', () => {
