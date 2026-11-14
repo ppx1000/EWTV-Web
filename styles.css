@@ -2676,7 +2676,7 @@ body.js-enabled .contact-card.reveal.is-visible {
 /* Slowly show the full photo on phones, without sensor access. */
 @media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
   .hero > img {
-    animation: heroMobilePan 22s ease-in-out infinite alternate;
+    animation: heroMobilePan 16s ease-in-out infinite alternate;
   }
 }
 @keyframes heroMobilePan {
