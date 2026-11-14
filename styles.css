@@ -2651,3 +2651,19 @@ body.js-enabled .contact-card.reveal.is-visible {
 @media (pointer: coarse) {
   .intro-panel:hover, .schedule-row:hover { transform: none; }
 }
+
+/* Keep the home link recognizable and give it a gentle interaction. */
+.brand {
+  border-radius: 8px;
+  transition: transform 220ms ease;
+}
+.brand-mark img { transition: transform 220ms ease; }
+.brand:focus-visible { outline: 3px solid var(--green-500); outline-offset: 5px; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .brand:hover { transform: translateY(-3px); }
+  .brand:hover .brand-mark img { transform: scale(1.04); }
+  .brand:active { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand, .brand-mark img { transition: none; }
+}
