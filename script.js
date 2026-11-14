@@ -287,8 +287,8 @@ let activeQuizStep = 0;
 let quizIsComplete = false;
 
 const quizPromptByStep = [
-  "Wähle zuerst das Alter aus.",
-  "Wähle aus, was beim Training im Vordergrund stehen soll.",
+  "Wählen Sie zuerst das Alter aus.",
+  "Wählen Sie aus, was beim Training im Vordergrund stehen soll.",
   "Sag noch kurz, wie viel Trainingserfahrung schon vorhanden ist."
 ];
 

@@ -61,7 +61,7 @@
   #angebot .offer-session::before { inset: 0 -25px -25px; }
   #angebot .offer-times { grid-template-columns: repeat(auto-fit,minmax(130px,1fr)); }
   #angebot .sport-fees { grid-template-columns: 1fr; gap: 15px; }
-  #angebot .sport-fees > p { grid-template-columns: minmax(0,1fr) auto; gap: 18px; align-items: baseline; }
+  #angebot .sport-fees > p { grid-template-columns: minmax(0,1fr) max-content; gap: 18px; align-items: baseline; }
 }
 @media (prefers-reduced-motion: reduce) {
   #angebot .offer-detail { animation: none; }
@@ -133,7 +133,7 @@ button {
   width: 124px;
   height: 54px;
   padding: 7px 10px;
-  background: rgba(255, 253, 248, 0.95);
+  background: #fff;
   border-radius: 8px;
 }
 
@@ -2666,4 +2666,9 @@ body.js-enabled .contact-card.reveal.is-visible {
 }
 @media (prefers-reduced-motion: reduce) {
   .brand, .brand-mark img { transition: none; }
+}
+
+#angebot .sport-fees strong,
+.fee-card strong {
+  white-space: nowrap;
 }
