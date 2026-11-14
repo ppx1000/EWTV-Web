@@ -2692,8 +2692,9 @@ body.js-enabled .contact-card.reveal.is-visible {
   .hero-look-control:focus-visible { outline: 3px solid var(--green-300); outline-offset: 4px; }
   .hero.is-motion-enabled > img {
     animation: none;
-    transform: none;
-    object-position: var(--hero-look-x, 50%) 50%;
-    transition: object-position 120ms linear;
+    max-width: none;
+    transform: translateX(var(--hero-look-offset, 0px));
+    object-position: center;
+    transition: transform 120ms linear;
   }
 }
