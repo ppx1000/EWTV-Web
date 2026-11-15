@@ -2,7 +2,6 @@
   const welcome = document.querySelector("[data-welcome]");
   if (!welcome) return;
   const root = document.documentElement;
-  const preview = false;
   const percentage = welcome.querySelector("[data-welcome-percentage]");
   const fill = welcome.querySelector(".welcome-loading-track > span");
   let progressFrame;
@@ -30,16 +29,7 @@
     cancelAnimationFrame(progressFrame);
     window.clearTimeout(cycleTimer);
     root.classList.remove("show-welcome");
-    if (preview) {
-      cycleTimer = window.setTimeout(() => {
-        finished = false;
-        root.classList.add("show-welcome");
-        startProgress();
-        cycleTimer = window.setTimeout(finish, 3600);
-      }, 650);
-    } else {
-      welcome.remove();
-    }
+    welcome.remove();
   };
   if (!root.classList.contains("show-welcome")) {
     finish();
@@ -79,26 +69,10 @@ const quizNextButtons = document.querySelectorAll("[data-quiz-next]");
 const quizRestart = document.querySelector("[data-quiz-restart]");
 const finderResult = document.querySelector("[data-finder-result]");
 const finderPlaceholder = document.querySelector("[data-finder-placeholder]");
-const apparatusButtons = document.querySelectorAll("[data-apparatus-key]");
-const apparatusTitle = document.querySelector("[data-apparatus-title]");
-const apparatusCopy = document.querySelector("[data-apparatus-copy]");
-const motionSymbol = document.querySelector("[data-motion-symbol]");
-const apparatusImage = document.querySelector("[data-apparatus-image]");
-const apparatusDetail = document.querySelector("[data-apparatus-detail]");
-const apparatusLab = document.querySelector("[data-apparatus]");
-const trainerCards = document.querySelectorAll("[data-trainer-card]");
-const trainerProfile = document.querySelector("[data-trainer-profile]");
-const profilePhoto = document.querySelector("[data-profile-photo]");
-const profileLabel = document.querySelector("[data-profile-label]");
-const profileName = document.querySelector("[data-profile-name]");
-const profileText = document.querySelector("[data-profile-text]");
-const profileFocus = document.querySelector("[data-profile-focus]");
-const profileSwitcher = document.querySelector("[data-profile-switcher]");
-
 document.body.classList.add("js-enabled");
 
 const setHeaderState = () => {
-  header.classList.toggle("is-scrolled", document.body.classList.contains("trainer-page") || window.scrollY > 24);
+  header.classList.toggle("is-scrolled", window.scrollY > 24);
 };
 
 setHeaderState();
@@ -289,7 +263,7 @@ let quizIsComplete = false;
 const quizPromptByStep = [
   "Wählen Sie zuerst das Alter aus.",
   "Wählen Sie aus, was beim Training im Vordergrund stehen soll.",
-  "Sag noch kurz, wie viel Trainingserfahrung schon vorhanden ist."
+  "Geben Sie an, wie viel Trainingserfahrung Sie oder Ihr Kind mitbringen."
 ];
 
 const getQuizButtonsForStep = (stepIndex) => {
@@ -418,197 +392,6 @@ quizRestart?.addEventListener("click", resetQuiz);
 
 updateFinder();
 setQuizStep(0);
-
-const apparatusContent = {
-  boden: {
-    symbol: "B",
-    title: "Boden",
-    image: "assets/apparatus-boden.jpg?v=3",
-    alt: "Stilisierte Turnszene am Gerät Boden",
-    copy: "Rollen, Stützen, Körperspannung und sichere Landungen bilden die Basis für vieles, was später an Geräten gebraucht wird."
-  },
-  reck: {
-    symbol: "R",
-    title: "Reck",
-    image: "assets/apparatus-reck.jpg?v=3",
-    alt: "Stilisierte Turnszene am Reck",
-    copy: "Am Reck geht es um Griffkraft, Körperspannung und kontrolliertes Schwingen. Saubere Grundlagen machen hier den Unterschied."
-  },
-  barren: {
-    symbol: "Ba",
-    title: "Barren",
-    image: "assets/apparatus-barren.jpg?v=3",
-    alt: "Stilisierte Turnszene am Barren",
-    copy: "Stützen, Schwingen und Halten verbinden Kraft mit Technik. Der Barren zeigt schnell, wie wichtig stabile Grundlagen sind."
-  },
-  balken: {
-    symbol: "Bl",
-    title: "Balken",
-    image: "assets/apparatus-balken.jpg?v=3",
-    alt: "Stilisierte Turnszene am Balken",
-    copy: "Am Balken stehen Gleichgewicht, Körperspannung und konzentrierte Bewegungen im Mittelpunkt. Kleine Schritte werden hier sehr bewusst trainiert."
-  },
-  sprung: {
-    symbol: "S",
-    title: "Sprung",
-    image: "assets/apparatus-sprung.jpg?v=3",
-    alt: "Stilisierte Turnszene am Sprung",
-    copy: "Anlauf, Abdruck und Landung werden Schritt für Schritt aufgebaut. Sicherheit und Rhythmus stehen immer vor Tempo."
-  },
-  minitramp: {
-    symbol: "M",
-    title: "Minitramp",
-    image: "assets/apparatus-minitramp.jpg?v=3",
-    alt: "Stilisierte Turnszene am Minitramp",
-    copy: "Beim Minitramp zählen Spannung, Absprung und eine kontrollierte Landung. Es bringt Dynamik ins Training, bleibt aber klar angeleitet."
-  }
-};
-
-const scrollToApparatus = () => {
-  const target = apparatusLab ?? apparatusDetail;
-  if (!target) return;
-
-  const headerOffset = 120;
-  const top = target.offsetTop - headerOffset;
-  window.scrollTo({ top: Math.max(top, 0), behavior: "auto" });
-};
-
-apparatusButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const item = apparatusContent[button.dataset.apparatusKey];
-    if (!item || !apparatusTitle || !apparatusCopy || !motionSymbol) return;
-
-    apparatusButtons.forEach((entry) => entry.classList.toggle("is-active", entry === button));
-    if (apparatusImage) {
-      apparatusImage.src = item.image;
-      apparatusImage.alt = item.alt;
-    }
-    motionSymbol.textContent = item.symbol;
-    apparatusTitle.textContent = item.title;
-    apparatusCopy.textContent = item.copy;
-    motionSymbol.style.animation = "none";
-    button.blur();
-    requestAnimationFrame(() => {
-      motionSymbol.style.animation = "";
-      window.setTimeout(scrollToApparatus, 40);
-    });
-  });
-});
-
-const trainerContent = [
-  {
-    key: "christopher",
-    name: "Christopher",
-    label: "Kleinkinder, Kinder & Wettkampfturnen",
-    photo: "trainer-a",
-    text: "Christopher begleitet die Kinder mit klarer Struktur und viel Ruhe durch die Stunde. Wichtig ist ihm, dass sich jedes Kind sicher fühlt, mutiger wird und Freude an Bewegung entwickelt.",
-    focus: ["Klare Abläufe", "Sichere Hilfestellung", "Motivation"]
-  },
-  {
-    key: "julia",
-    name: "Julia",
-    label: "Kleinkinder & Kinder",
-    photo: "trainer-b",
-    text: "Julia achtet darauf, dass Kinder gut ankommen, Übungen verstehen und sich Schritt für Schritt etwas zutrauen. Ihre Stunden sind ruhig geführt, freundlich und verlässlich.",
-    focus: ["Geduld", "Grundlagen", "Ruhige Begleitung"]
-  },
-  {
-    key: "friedericke",
-    name: "Friedericke",
-    label: "Jugend & Wettkampf",
-    photo: "trainer-c",
-    text: "Friedericke arbeitet gerne an Technik, Körperspannung und sauberem Aufbau. Sie hilft den Jugendlichen, Übungen genauer zu verstehen und mit mehr Selbstvertrauen zu turnen.",
-    focus: ["Technik", "Körperspannung", "Präzision"]
-  },
-  {
-    key: "tobias",
-    name: "Tobias",
-    label: "Kleinkinder & Kinder",
-    photo: "trainer-d",
-    text: "Tobias bringt viel Energie in die Halle und behält trotzdem den Überblick. Er mag Stunden, in denen Kinder in Bewegung bleiben, lachen und nebenbei wichtige Grundlagen lernen.",
-    focus: ["Bewegungsfreude", "Übersicht", "Aktive Gruppen"]
-  },
-  {
-    key: "felix",
-    name: "Felix",
-    label: "Jugend & Wettkampf",
-    photo: "trainer-e",
-    text: "Felix legt Wert auf Kraft, saubere Progressionen und sichere Landungen. Er baut Übungen so auf, dass die Jugendlichen merken, warum jeder Zwischenschritt wichtig ist.",
-    focus: ["Kraftaufbau", "Progression", "Sicherheit"]
-  },
-  {
-    key: "lisa",
-    name: "Lisa",
-    label: "Kleinkinder & Kinder",
-    photo: "trainer-f",
-    text: "Lisa hat einen spielerischen Zugang und viel Geduld. Sie schafft eine angenehme Stimmung, in der Kinder Neues ausprobieren können, ohne sich gedrängt zu fühlen.",
-    focus: ["Spielerisch", "Geduld", "Vertrauen"]
-  },
-  {
-    key: "christina",
-    name: "Christina",
-    label: "Damengymnastik",
-    photo: "trainer-g",
-    text: "Christina gestaltet die Damengymnastik klar, wohltuend und aktiv. Im Mittelpunkt stehen Beweglichkeit, Stabilität und ein Training, das gut in den Alltag passt.",
-    focus: ["Beweglichkeit", "Stabilität", "Wohlbefinden"]
-  },
-  {
-    key: "patrick",
-    name: "Patrick",
-    label: "Kinder & Jugend",
-    photo: "trainer-h",
-    text: "Patrick begleitet Kinder und Jugendliche mit ruhigem Aufbau, klaren Erklärungen und sicherer Hilfestellung. Ihm ist wichtig, dass Übungen verständlich bleiben und Fortschritte Schritt für Schritt entstehen.",
-    focus: ["Hilfestellung", "Technikaufbau", "Sicherheit"]
-  }
-];
-
-const getTrainerUrl = (key) => `trainer.html?person=${encodeURIComponent(key)}`;
-
-trainerCards.forEach((card) => {
-  if (card instanceof HTMLAnchorElement) {
-    card.setAttribute("aria-label", `${card.querySelector("h3")?.textContent ?? "Trainerprofil"} ansehen`);
-  }
-});
-
-const renderTrainerProfile = () => {
-  if (!trainerProfile || !profilePhoto || !profileLabel || !profileName || !profileText || !profileFocus || !profileSwitcher) return;
-
-  const requestedKey = new URLSearchParams(window.location.search).get("person") ?? "christopher";
-  const activeIndex = Math.max(
-    0,
-    trainerContent.findIndex((item) => item.key === requestedKey)
-  );
-  const item = trainerContent[activeIndex];
-  document.title = `${item.name} | Trainerteam | Erster Wiener Turnverein`;
-  profilePhoto.className = `trainer-profile-photo ${item.photo}`;
-  profilePhoto.dataset.initial = item.name.slice(0, 1);
-  profileLabel.textContent = item.label;
-  profileName.textContent = item.name;
-  profileText.textContent = item.text;
-
-  profileFocus.replaceChildren(
-    ...item.focus.map((focus) => {
-      const tag = document.createElement("span");
-      tag.textContent = focus;
-      return tag;
-    })
-  );
-
-  profileSwitcher.replaceChildren(
-    ...trainerContent.map((entry) => {
-      const link = document.createElement("a");
-      link.href = getTrainerUrl(entry.key);
-      link.textContent = entry.name;
-      link.classList.toggle("is-active", entry.key === item.key);
-      if (entry.key === item.key) {
-        link.setAttribute("aria-current", "page");
-      }
-      return link;
-    })
-  );
-};
-
-renderTrainerProfile();
 
 const revealObserver = new IntersectionObserver(
   (entries) => {

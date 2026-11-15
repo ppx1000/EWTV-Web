@@ -3,19 +3,24 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Erster Wiener Turnverein: Turnstunden, Wartelisten, Trainerteam und Kontakt.">
+    <meta name="description" content="Erster Wiener Turnverein: Turnen für Kinder und Erwachsene, Trainingszeiten und Kontakt.">
     <title>Erster Wiener Turnverein</title>
     <script>
       (() => {
         const key = "ewtv-intro-seen";
         const navigation = performance.getEntriesByType("navigation")[0];
+        const url = new URL(window.location.href);
+        const returningFromLegalPage = url.searchParams.get("zurueck") === "1";
         let seen = false;
         try {
           seen = sessionStorage.getItem(key) === "1";
           sessionStorage.setItem(key, "1");
         } catch (_) { /* Navigation type still prevents an intro on reload. */ }
-        const preview = false;
-        if (preview || (!seen && navigation?.type !== "reload" && navigation?.type !== "back_forward")) {
+        if (returningFromLegalPage) {
+          url.searchParams.delete("zurueck");
+          history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+        }
+        if (!returningFromLegalPage && !seen && navigation?.type !== "reload" && navigation?.type !== "back_forward") {
           document.documentElement.classList.add("show-welcome");
           // Reveal the page even if the main script fails to load.
           window.ewtvWelcomeFallback = window.setTimeout(() => document.documentElement.classList.remove("show-welcome"), 4000);
@@ -25,7 +30,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20261114-auto-pan-faster">
+    <link rel="stylesheet" href="styles.css?v=20261115-legal-pages">
   </head>
   <body>
     <div class="welcome-screen" aria-hidden="true" data-welcome>
@@ -44,14 +49,13 @@
         </span>
         <span>
           <strong>EWTV</strong>
-          
         </span>
       </a>
-      <button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" data-menu-toggle>
+      <button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="main-navigation" data-menu-toggle>
         <span></span>
         <span></span>
       </button>
-      <nav class="main-nav" data-nav>
+      <nav class="main-nav" id="main-navigation" aria-label="Hauptnavigation" data-nav>
         <a href="#angebot">Angebot</a>
         <a href="#sportcheck">Sportcheck</a>
         <a href="#wochenplan">Wochenplan</a>
@@ -69,7 +73,7 @@
           <p class="eyebrow reveal">Turnen in Wien seit Generationen</p>
           <h1 class="reveal">Erster Wiener Turnverein</h1>
           <p class="hero-copy reveal">
-            Bewegung, Technik und Gemeinschaft in einem modernen Trainingsumfeld. Kinder- und Jugendgruppen sind derzeit voll, Anfragen bleiben möglich.
+            Turnen für Kinder, Jugendliche und Erwachsene in der Schleifmühlgasse. In den Erwachsenengruppen sind Plätze frei; für Kinder und Jugendliche führen wir Wartelisten.
           </p>
           <div class="hero-actions reveal">
             <a class="button primary" href="#kontakt">Anfrage senden</a>
@@ -88,18 +92,18 @@
         <div class="intro-grid">
           <article class="intro-panel reveal">
             <span>01</span>
-            <h2>Moderner Turnbetrieb</h2>
-            <p>Klare Gruppen, verlässliche Betreuung und Training mit Blick auf Technik, Freude und Entwicklung.</p>
+            <h2>Turnen für jedes Alter</h2>
+            <p>Vom ersten Purzelbaum bis zum Gerätturnen: Bei uns trainieren Kinder, Jugendliche und Erwachsene in passenden Gruppen.</p>
           </article>
           <article class="intro-panel reveal">
             <span>02</span>
-            <h2>Grün als Vereinsfarbe</h2>
-            <p>Ein ruhiger, kraftvoller Grünton prägt den neuen Auftritt: sportlich, frisch und wiedererkennbar.</p>
+            <h2>Gemeinsam in Bewegung</h2>
+            <p>Ob Turnen, Krafttraining oder Gymnastik – bei uns finden Sie Bewegung und Gemeinschaft mitten in Wien.</p>
           </article>
           <article class="intro-panel reveal">
             <span>03</span>
-            <h2>Transparente Platzvergabe</h2>
-            <p>Einfache Anmeldung per Mail, faire Vormerkung nach Alter und Gruppe – und rasche Rückmeldung, sobald ein Platz frei wird.</p>
+            <h2>Ihr Weg zu uns</h2>
+            <p>Interesse an einer Turnstunde? Schreiben Sie uns. Ist die Kinder- oder Jugendgruppe voll, nehmen wir Ihr Kind auf die Warteliste auf.</p>
           </article>
         </div>
       </section>
@@ -137,7 +141,6 @@
           <span class="offer-audience">4–6 Jahre</span>
           <h3>Kleinkinderturnstunde</h3>
           <p>Spielerisch Bewegung entdecken: Mit einfachen Übungen fördern wir Koordination, Gleichgewicht und Rhythmus und vermitteln erste Turngrundlagen.</p>
-          
         </div>
         <div class="offer-session">
           <div class="offer-times"><p><strong>Montag</strong><span>16:10–17:10 Uhr</span></p></div>
@@ -151,7 +154,6 @@
           <span class="offer-audience">6–9 Jahre</span>
           <h3>Kinderturnen</h3>
           <p>Mit abwechslungsreichen Übungen festigen wir die Turngrundlagen und fördern Kraft, Beweglichkeit und Koordination. Der Spaß an der Bewegung steht dabei im Mittelpunkt.</p>
-          
         </div>
         <div class="offer-session">
           <div class="offer-times"><p><strong>Montag</strong><span>17:20–18:50 Uhr</span></p></div>
@@ -165,7 +167,6 @@
           <span class="offer-audience">10–14 Jahre</span>
           <h3>Jugendturnen</h3>
           <p>Wir vertiefen die Turntechnik, trainieren Kraft und Beweglichkeit und erarbeiten neue Elemente. Dabei fördern wir das selbstständige Üben und die Freude am gemeinsamen Training.</p>
-          
         </div>
         <div class="offer-session">
           <div class="offer-times"><p><strong>Mittwoch</strong><span>17:00–18:30 Uhr</span></p></div>
@@ -179,7 +180,6 @@
           <span class="offer-audience">8–14 Jahre</span>
           <h3>Wettkampfturnen</h3>
           <p>Gezieltes Training zur Vorbereitung auf Wettkämpfe. Wir verfeinern die Technik und erarbeiten Übungen an den Geräten.</p>
-          
         </div>
         <div class="offer-session">
           <div class="offer-times"><p><strong>Freitag</strong><span>16:30–18:30 Uhr</span></p></div>
@@ -192,7 +192,6 @@
           <span class="offer-audience">ab 15 Jahren</span>
           <h3>Gerätturnen für Erwachsene</h3>
           <p>Ob Sie neue Elemente ausprobieren, an Ihrer Technik feilen oder einfach in Bewegung bleiben möchten: Beim freien Training an den Geräten gestalten Sie Ihr Training nach Ihren eigenen Zielen und in Ihrem Tempo. Trainerinnen und Trainer sind vor Ort und unterstützen Sie mit Tipps und Hilfestellung.</p>
-          
         </div>
         <div class="offer-session">
           <div class="offer-times"><p><strong>Mittwoch</strong><span>18:30–20:00 Uhr</span></p><p><strong>Freitag</strong><span>18:30–20:00 Uhr</span></p></div>
@@ -211,7 +210,6 @@
         <div class="offer-session">
           <div class="offer-times"><p><strong>Montag</strong><span>17:20–18:20 Uhr</span></p></div>
           
-          
           <span class="offer-status">Freie Plätze</span>
           <p class="offer-condition">Freie Plätze verfügbar – bei Interesse direkt anfragen.</p>
           <a class="offer-contact" href="#kontakt-kraft">Training anfragen<span aria-hidden="true"> →</span></a>
@@ -222,11 +220,9 @@
           <span class="offer-audience">Für Damen und Herren aller Altersstufen</span>
           <h3>Bodywork</h3>
           <p>Ein abwechslungsreiches Ganzkörpertraining zu flotter Musik. Mit und ohne Geräte wie Therabänder, Bälle, Steps und Hanteln kräftigen Sie die wichtigsten Muskelgruppen, verbessern Ihre Koordination und mobilisieren Ihren Körper. Die Übungen werden in unterschiedlichen Intensitäten durchgeführt.</p>
-          
         </div>
         <div class="offer-session">
           <div class="offer-times"><p><strong>Dienstag</strong><span>19:00–20:00 Uhr</span></p></div>
-          
           
           <span class="offer-status">Freie Plätze</span>
           <p class="offer-condition">Freie Plätze verfügbar – bei Interesse direkt anfragen.</p>
@@ -243,7 +239,6 @@
         <div class="offer-session">
           <div class="offer-times"><p><strong>Montag</strong><span>19:00–20:00 Uhr</span></p><p><strong>Mittwoch</strong><span>09:00–10:00 Uhr</span></p></div>
           
-          
           <span class="offer-status">Freie Plätze</span>
           <p class="offer-condition">Freie Plätze verfügbar – bei Interesse direkt anfragen.</p>
           <a class="offer-contact" href="#kontakt-gymnastik">Training anfragen<span aria-hidden="true"> →</span></a>
@@ -254,11 +249,9 @@
           <span class="offer-audience">Für Damen</span>
           <h3>Wirbelsäulengymnastik</h3>
           <p>Gymnastik mit besonderem Augenmerk auf die Wirbelsäule: Mit gezielten Übungen halten wir den Rücken und die umliegende Muskulatur in Schwung und fördern die Beweglichkeit.</p>
-          
         </div>
         <div class="offer-session">
           <div class="offer-times"><p><strong>Donnerstag</strong><span>09:00–10:00 Uhr</span></p></div>
-          
           
           <span class="offer-status">Freie Plätze</span>
           <p class="offer-condition">Freie Plätze verfügbar – bei Interesse direkt anfragen.</p>
@@ -277,7 +270,7 @@
         <div class="section-heading reveal">
           <p class="eyebrow">Sportcheck</p>
           <h2>Welche Gruppe passt?</h2>
-          <p>Ein paar kurze Fragen beantworten, dann schlägt die Website die passende Gruppe und den nächsten Schritt vor.</p>
+          <p>Beantworten Sie drei kurze Fragen und finden Sie ein passendes Angebot.</p>
         </div>
         <div class="finder reveal" data-finder>
           <div class="finder-controls" data-quiz-track>
@@ -351,7 +344,7 @@
         </div>
         <div class="schedule reveal" data-schedule>
           <div class="schedule-row" data-day="mo">
-            <span class="schedule-time">16:20-17:20</span>
+            <span class="schedule-time">16:10–17:10</span>
             <span class="schedule-name">Kleinkinderturnstunde</span>
             <span class="schedule-place">gr. Halle</span>
           </div>
@@ -715,6 +708,13 @@
             Mitglied bei: Turnsport Austria, ÖTB, ASVÖ
           </p>
         </div>
+        <div class="footer-column">
+          <h2>Rechtliches</h2>
+          <nav class="footer-legal-links" aria-label="Rechtliche Informationen">
+            <a href="impressum.html">Impressum</a>
+            <a href="datenschutz.html">Datenschutz</a>
+          </nav>
+        </div>
       </div>
       <div class="footer-bottom">
         <span>© 2026 Erster Wiener Turnverein</span>
@@ -722,6 +722,6 @@
       </div>
     </footer>
 
-    <script src="script.js?v=20261114-auto-pan"></script>
+    <script src="script.js?v=20261115-legal-pages"></script>
   </body>
 </html>
