@@ -2483,4 +2483,13 @@ body.js-enabled .capacity-card.reveal.is-visible:hover {
   .footer-inner { gap: 22px; padding-bottom: 24px; }
   .footer-column h2 { margin-bottom: 9px; }
   .footer-column p { font-size: .88rem; }
+
+  /* The prompt needs less room than the final recommendation. */
+  .finder-result:not(.is-complete) {
+    min-height: 145px;
+    padding-block: 16px;
+  }
+
+  /* Keep both final adult choices aligned in the same two-column row. */
+  #kontakt-wirbelsaeule { grid-column: auto; }
 }
